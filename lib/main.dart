@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vaccination_tracker_app/pages/start_page.dart';
+import 'package:vaccination_tracker_app/pages/intro_page.dart';
 
 void main() => runApp(const ProviderScope(child: VaccinationTrackerApp()));
 
@@ -12,6 +12,6 @@ class VaccinationTrackerApp extends StatelessWidget {
     return const MaterialApp(
         title: 'Material App',
         debugShowCheckedModeBanner: false,
-        home: StartPage());
+        home: OnBoardingPage());
   }
 }
