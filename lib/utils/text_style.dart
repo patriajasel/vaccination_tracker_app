@@ -23,4 +23,7 @@ class TextStyles {
 
   TextStyle sectionTitle = const TextStyle(
       fontFamily: 'RadioCanada', fontSize: 20.0, fontWeight: FontWeight.bold);
+
+  TextStyle vaccineNames =
+      const TextStyle(fontFamily: "RadioCanada", fontWeight: FontWeight.bold);
 }

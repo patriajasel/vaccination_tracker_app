@@ -27,6 +27,28 @@ class _HomePageState extends State<HomePage> {
     {'title': 'MMR', 'checked': false},
   ];
 
+  final List<String> vaccineImages = [
+    'lib/assets/images/vaccines/bcg_vaccine.jpg',
+    'lib/assets/images/vaccines/hepatitis_b_vaccine.jpg',
+    'lib/assets/images/vaccines/dtap_vaccine.jpg',
+    'lib/assets/images/vaccines/opv_vaccine.jpg',
+    'lib/assets/images/vaccines/ipv_vaccine.jpg',
+    'lib/assets/images/vaccines/pcv_vaccine.jpg',
+    'lib/assets/images/vaccines/mmr_vaccine.jpg',
+    'lib/assets/images/vaccines/pentavalent_vaccine.jpg',
+  ];
+
+  final List<String> vaccineNames = [
+    'BCG',
+    'Hepatitis B',
+    'DTAP',
+    'OPV',
+    'IPV',
+    'PCV',
+    'MMR',
+    'Pentavalent',
+  ];
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -53,8 +75,7 @@ class _HomePageState extends State<HomePage> {
           // Scrollable Content
           SingleChildScrollView(
             child: Container(
-              height: screenHeight,
-              padding: EdgeInsets.only(top: screenHeight * 0.1),
+              padding: EdgeInsets.only(top: screenHeight * 0.0525),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyles().sectionTitle,
                     ),
                   ),
-                  Expanded(
+                  SizedBox(
+                    height: screenHeight * 0.3,
                     child: GridView.builder(
                       padding: const EdgeInsets.all(8.0),
                       gridDelegate:
@@ -120,6 +142,9 @@ class _HomePageState extends State<HomePage> {
                         childAspectRatio: 6,
                       ),
                       itemCount: vaccines.length,
+                      shrinkWrap:
+                          true, // Ensures GridView doesn't take infinite space
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return CheckboxListTile(
                           title: Text(vaccines[index]['title']),
@@ -136,11 +161,71 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                  )
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                      child: Text(
+                        "All About Vaccines...",
+                        style: TextStyles().sectionTitle,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.25,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: vaccineImages.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.black26,
+                                        blurRadius: 4,
+                                        offset: Offset(0, 2)),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(vaccineImages[index],
+                                      height: screenHeight * 0.2,
+                                      width: screenWidth * 0.3,
+                                      fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              vaccineNames[index],
+                              style: TextStyles().vaccineNames,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
+          Positioned(
+              top: screenHeight * 0.06,
+              right: screenWidth * 0.15,
+              child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.calendar_month,
+                    color: Colors.white,
+                  ))),
         ],
       ),
     );
