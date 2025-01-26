@@ -1,17 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vaccination_tracker_app/pages/setup_child.dart';
+import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 import 'package:vaccination_tracker_app/utils/widget_generate.dart';
 
-class SetUpProfileGuardianPage extends StatefulWidget {
+/**
+ * TODO SECTION
+ * 
+ */
+
+class SetUpProfileGuardianPage extends ConsumerStatefulWidget {
   const SetUpProfileGuardianPage({super.key});
 
   @override
-  State<SetUpProfileGuardianPage> createState() =>
+  ConsumerState<SetUpProfileGuardianPage> createState() =>
       _SetUpProfileGuardianPageState();
 }
 
-class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
-  final guardianName = TextEditingController();
+class _SetUpProfileGuardianPageState
+    extends ConsumerState<SetUpProfileGuardianPage> {
+  final guardianSurname = TextEditingController();
+  final guardianFirstName = TextEditingController();
+  final guardianLastName = TextEditingController();
+  final guardianMiddleName = TextEditingController();
   final guardianEmail = TextEditingController();
   final guardianNumber = TextEditingController();
   final guardianAge = TextEditingController();
@@ -19,8 +34,15 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
   final guardianBirthDay = TextEditingController();
   final guardianAddress = TextEditingController();
 
-  final genderList = ["Male", "Female"];
+  bool surnameValidator = true;
+  bool firstNameValidator = true;
+  bool emailValidator = true;
+  bool contactValidator = true;
+
+  final genderList = ["Male", "Female", "Rather Not Say"];
   String? guardianGender = "Male";
+
+  File? selectedImage;
 
   @override
   void initState() {
@@ -39,7 +61,7 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.blue.shade900,
+              Colors.cyan.shade300,
               Colors.white
             ], // Colors for the gradient
             begin: Alignment.topCenter,
@@ -88,20 +110,40 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.grey,
-                    child: Icon(
-                      Icons.person,
-                      size: 100,
-                      color: Colors.white,
-                    ),
+                    backgroundColor: Colors.grey.shade400,
+                    backgroundImage: selectedImage != null
+                        ? FileImage(selectedImage!)
+                        : null,
+                    child: selectedImage == null
+                        ? const Icon(
+                            Icons.person,
+                            size: 90,
+                            color: Colors.white,
+                          )
+                        : null,
                   ),
                 ),
-                const Text(
-                  "Upload a photo(optional)",
-                  style: TextStyle(fontFamily: "Mali", fontSize: 18),
-                )
+                SizedBox(
+                  width: screenWidth * 0.5, // Adjust width as needed
+                  child: ListTile(
+                    title: const Text(
+                      "Upload a photo (optional)",
+                      style: TextStyle(fontFamily: "Mali", fontSize: 16),
+                    ),
+                    subtitle: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.cyan,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5))),
+                        onPressed: () {
+                          pickGuardianImage();
+                        },
+                        child: const Text("Upload")),
+                  ),
+                ),
               ],
             ),
 
@@ -119,12 +161,13 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                           right: screenWidth * 0.05,
                           left: screenWidth * 0.05),
                       child: GenerateWidget().createTextField(
-                        guardianName,
-                        "Surname",
-                        false,
-                        true,
-                        false,
-                      )),
+                          guardianSurname,
+                          "Surname",
+                          false,
+                          true,
+                          false,
+                          false,
+                          surnameValidator)),
 
                   Padding(
                       padding: EdgeInsets.only(
@@ -132,12 +175,13 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                           right: screenWidth * 0.05,
                           left: screenWidth * 0.05),
                       child: GenerateWidget().createTextField(
-                        guardianName,
-                        "First Name",
-                        false,
-                        true,
-                        false,
-                      )),
+                          guardianFirstName,
+                          "First Name",
+                          false,
+                          true,
+                          false,
+                          false,
+                          firstNameValidator)),
 
                   Padding(
                       padding: EdgeInsets.only(
@@ -145,12 +189,13 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                           right: screenWidth * 0.05,
                           left: screenWidth * 0.05),
                       child: GenerateWidget().createTextField(
-                        guardianName,
-                        "Middle Name",
-                        false,
-                        true,
-                        false,
-                      )),
+                          guardianMiddleName,
+                          "Middle Name",
+                          false,
+                          true,
+                          false,
+                          false,
+                          true)),
 
                   // For Age and Gender
                   Row(
@@ -162,13 +207,9 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                               top: screenHeight * 0.01,
                               right: screenWidth * 0.02,
                               left: screenWidth * 0.05),
-                          child: GenerateWidget().createTextField(
-                            guardianAge,
-                            "Age",
-                            false,
-                            true,
-                            false,
-                          ),
+                          child: GenerateWidget().createTextField(guardianAge,
+                              "Age", false, true, false, true, true,
+                              maxLength: 2),
                         ),
                       ),
 
@@ -194,7 +235,7 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                             },
                             style: TextStyle(
                                 color: Colors.grey.shade800,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 2.0,
                                 fontFamily: "DMSerif"),
@@ -209,17 +250,17 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                                   fontFamily: "DMSerif"),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.blue.shade900, width: 2.0),
+                                    color: Colors.cyan.shade300, width: 2.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.blue.shade900, width: 2.0),
+                                    color: Colors.cyan.shade700, width: 2.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.blue.shade900, width: 2.0),
+                                    color: Colors.cyan.shade400, width: 2.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
@@ -241,6 +282,8 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                         false,
                         true,
                         false,
+                        false,
+                        true,
                       )),
 
                   // For First Name
@@ -250,12 +293,13 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                           right: screenWidth * 0.05,
                           left: screenWidth * 0.05),
                       child: GenerateWidget().createTextField(
-                        guardianEmail,
-                        "Email Address",
-                        false,
-                        true,
-                        false,
-                      )),
+                          guardianEmail,
+                          "Email Address",
+                          false,
+                          true,
+                          false,
+                          false,
+                          emailValidator)),
 
                   // For Middle Name
                   Padding(
@@ -264,12 +308,14 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                           right: screenWidth * 0.05,
                           left: screenWidth * 0.05),
                       child: GenerateWidget().createTextField(
-                        guardianNumber,
-                        "Contact Number",
-                        false,
-                        true,
-                        false,
-                      )),
+                          guardianNumber,
+                          "Contact Number",
+                          false,
+                          true,
+                          false,
+                          true,
+                          contactValidator,
+                          maxLength: 11)),
                 ],
               ),
             ),
@@ -285,7 +331,7 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(screenWidth * 0.4, screenHeight * 0.05),
-                      backgroundColor: Colors.blue.shade900,
+                      backgroundColor: Colors.cyan.shade400,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.all(5),
                       shape: RoundedRectangleBorder(
@@ -301,9 +347,34 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
                 ),
                 SizedBox(width: screenWidth * 0.1),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => const SetUpProfileChildPage()));
+                  onPressed: () async {
+                    final guardian = ref.read(rpGuardianInfo.notifier);
+                    guardian.guardianSurname = guardianSurname.text;
+                    guardian.guardianFirstName = guardianFirstName.text;
+                    guardian.guardianMiddleName = guardianMiddleName.text;
+                    guardian.guardianAge = int.parse(guardianAge.text);
+                    guardian.guardianGender = guardianGender!;
+                    guardian.guardianAddress = guardianAddress.text;
+                    guardian.guardianEmail = guardianEmail.text;
+                    guardian.guardianContact = guardianNumber.text;
+                    guardian.guardianImage = selectedImage;
+
+                    bool validate = await validateTextFields();
+                    if (context.mounted) {
+                      if (validate) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (builder) =>
+                                const SetUpProfileChildPage()));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: "Required fields are empty",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.SNACKBAR,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white,
+                            fontSize: 14.0);
+                      }
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(screenWidth * 0.4, screenHeight * 0.05),
@@ -327,5 +398,53 @@ class _SetUpProfileGuardianPageState extends State<SetUpProfileGuardianPage> {
         ),
       ),
     );
+  }
+
+  Future<bool> validateTextFields() async {
+    if (guardianSurname.text.isEmpty ||
+        guardianFirstName.text.isEmpty ||
+        guardianEmail.text.isEmpty ||
+        guardianNumber.text.isEmpty) {
+      if (guardianSurname.text.isEmpty) {
+        setState(() {
+          surnameValidator = false;
+        });
+      }
+
+      if (guardianFirstName.text.isEmpty) {
+        setState(() {
+          firstNameValidator = false;
+        });
+      }
+
+      if (guardianEmail.text.isEmpty) {
+        setState(() {
+          emailValidator = false;
+        });
+      }
+
+      if (guardianNumber.text.isEmpty) {
+        setState(() {
+          contactValidator = false;
+        });
+      }
+      return false;
+    } else {
+      surnameValidator = true;
+      firstNameValidator = true;
+      emailValidator = true;
+      contactValidator = true;
+      return true;
+    }
+  }
+
+  Future<void> pickGuardianImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        selectedImage = File(image.path);
+      });
+    }
   }
 }
