@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vaccination_tracker_app/pages/all_calendar_page.dart';
 import 'package:vaccination_tracker_app/utils/text_style.dart';
+
+/**
+ * TODO SECTION
+ * 
+ * ! All About vaccines section
+ * ! Sync Vaccines taken with firebase database data
+ * ! Schedule functionality
+ * ! Prevent returning back to login if user just logged in
+ */
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.blue.shade700,
+                  Colors.cyan.shade300,
                   Colors.white,
                 ],
                 begin: Alignment.topCenter,
@@ -80,28 +90,47 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TableCalendar(
-                      calendarFormat: CalendarFormat.week,
-                      daysOfWeekHeight: screenHeight * 0.04,
-                      headerStyle: const HeaderStyle(
-                          formatButtonVisible: false,
-                          titleTextStyle: TextStyle(
-                              fontFamily: "RadioCanada",
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold)),
-                      daysOfWeekStyle: DaysOfWeekStyle(
-                          weekdayStyle: TextStyles().daysOfWeek,
-                          weekendStyle: TextStyles().daysOfWeek),
-                      calendarStyle: CalendarStyle(
-                          defaultTextStyle: TextStyles().calendarDays,
-                          todayTextStyle: TextStyles().calendarDays,
-                          todayDecoration: BoxDecoration(
-                              color: Colors.blue.shade100,
-                              borderRadius: BorderRadius.circular(20)),
-                          weekendTextStyle: TextStyles().calendarDays),
-                      focusedDay: dateToday,
-                      firstDay: DateTime.utc(2020, 01, 01),
-                      lastDay: DateTime.utc(2040, 12, 31)),
+                  Stack(
+                    children: [
+                      TableCalendar(
+                          calendarFormat: CalendarFormat.week,
+                          daysOfWeekHeight: screenHeight * 0.04,
+                          headerStyle: const HeaderStyle(
+                              formatButtonVisible: false,
+                              titleTextStyle: TextStyle(
+                                  fontFamily: "RadioCanada",
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold)),
+                          daysOfWeekStyle: DaysOfWeekStyle(
+                              weekdayStyle: TextStyles().daysOfWeek,
+                              weekendStyle: TextStyles().daysOfWeek),
+                          calendarStyle: CalendarStyle(
+                              defaultTextStyle: TextStyles().calendarDays,
+                              todayTextStyle: TextStyles().calendarDays,
+                              todayDecoration: BoxDecoration(
+                                  color: Colors.cyan.shade50,
+                                  borderRadius: BorderRadius.circular(20)),
+                              weekendTextStyle: TextStyles().calendarDays),
+                          focusedDay: dateToday,
+                          firstDay: DateTime.utc(2020, 01, 01),
+                          lastDay: DateTime.utc(2040, 12, 31)),
+                      Positioned(
+                          top: screenHeight * 0.01,
+                          right: screenWidth * 0.15,
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AllCalendarPage()));
+                              },
+                              icon: const Icon(
+                                Icons.calendar_month,
+                                color: Colors.white,
+                              ))),
+                    ],
+                  ),
                   SizedBox(height: screenHeight * 0.05),
                   Center(
                     child: Text(
@@ -217,15 +246,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Positioned(
-              top: screenHeight * 0.06,
-              right: screenWidth * 0.15,
-              child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.calendar_month,
-                    color: Colors.white,
-                  ))),
         ],
       ),
     );
