@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vaccination_tracker_app/pages/intro_screens/intro_page_1.dart';
 import 'package:vaccination_tracker_app/pages/intro_screens/intro_page_2.dart';
@@ -43,9 +44,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
     return Scaffold(
       body: Container(
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue.shade900, Colors.white],
+            colors: [Colors.cyan.shade300, Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -70,23 +71,27 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             Container(
               alignment: const Alignment(0.0, 0.9),
               child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    if (_currentPage == 3) {
+                onPressed: () async {
+                  if (_currentPage == 3) {
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('isFirstTime', false);
+                    setState(() {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const StartPage()));
-                    } else {
+                    });
+                  } else {
+                    setState(() {
                       _pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut);
-                    }
-                  });
+                    });
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(screenWidth * 0.75, screenHeight * 0.05),
-                    backgroundColor: Colors.blue.shade700),
+                    backgroundColor: Colors.cyan.shade300),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
