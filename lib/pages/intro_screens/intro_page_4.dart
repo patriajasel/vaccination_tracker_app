@@ -10,9 +10,12 @@ class IntroPage4 extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.blue.shade900, Colors.white], // Colors for the gradient
+          colors: [
+            Colors.cyan.shade300,
+            Colors.white
+          ], // Colors for the gradient
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -22,11 +25,11 @@ class IntroPage4 extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: Colors.yellow.shade50,
-            radius: 100,
+            radius: 90,
             child: Icon(
               Icons.money_off,
-              size: 100,
-              color: Colors.blue.shade900,
+              size: 90,
+              color: Colors.cyan.shade300,
             ),
           ),
           SizedBox(height: screenHeight * 0.1),

@@ -15,7 +15,7 @@ class StartPage extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.blue.shade900,
+              Colors.cyan.shade300,
               Colors.white
             ], // Colors for the gradient
             begin: Alignment.topCenter,
@@ -34,7 +34,7 @@ class StartPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: const Text(
-                'VacCalendar App',
+                'BakunaDo! App',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 25,
@@ -70,7 +70,7 @@ class StartPage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                   fixedSize: Size(screenWidth * 0.6, screenHeight * 0.05),
-                  backgroundColor: Colors.blue.shade900,
+                  backgroundColor: Colors.cyan.shade300,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.all(5),
                   shape: RoundedRectangleBorder(
@@ -88,11 +88,13 @@ class StartPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (route) => const SetUpProfileGuardianPage()));
+                    builder: (route) =>
+                        const SetUpProfileGuardianPage() //SetUpProfileGuardianPage()
+                    ));
               },
               style: ElevatedButton.styleFrom(
                   fixedSize: Size(screenWidth * 0.6, screenHeight * 0.05),
-                  backgroundColor: Colors.blue.shade900,
+                  backgroundColor: Colors.cyan.shade300,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.all(5),
                   shape: RoundedRectangleBorder(
