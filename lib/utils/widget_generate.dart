@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GenerateWidget {
   TextField createTextField(
-    TextEditingController controller,
-    String labelText,
-    bool suffixIcon,
-    bool enabled,
-    bool obscure, {
-    Function? function,
-    String? hintText,
-    Icon? prefixIcon,
-  }) {
+      TextEditingController controller,
+      String labelText,
+      bool isReadOnly,
+      bool enabled,
+      bool obscure,
+      bool forNumbers,
+      bool isValidated,
+      {Function? function,
+      String? hintText,
+      Icon? prefixIcon,
+      Icon? suffixIcon,
+      Function? updateTextField,
+      int? maxLength}) {
     return TextField(
-        controller: controller,
         expands: false,
         obscureText: obscure,
-        readOnly: suffixIcon ? true : false,
+        readOnly: isReadOnly ? true : false,
         enabled: enabled,
+        controller: controller,
+        maxLength: forNumbers == true ? maxLength : null,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
+        buildCounter: (context,
+            {required currentLength, required isFocused, maxLength}) {
+          return null;
+        },
+        inputFormatters:
+            forNumbers == true ? [FilteringTextInputFormatter.digitsOnly] : [],
         decoration: InputDecoration(
           hintText: hintText,
           labelText: labelText,
@@ -28,12 +41,12 @@ class GenerateWidget {
               color: enabled != true ? Colors.grey : Colors.grey.shade800,
               fontSize: 16.0,
               fontWeight: FontWeight.bold),
-          suffixIcon: suffixIcon
+          suffixIcon: suffixIcon != null
               ? IconButton(
                   onPressed: () {
                     function!();
                   },
-                  icon: const Icon(Icons.calendar_month))
+                  icon: suffixIcon)
               : null,
 
           prefixIcon: prefixIcon,
@@ -44,7 +57,7 @@ class GenerateWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-                color: Colors.blue.shade900,
+                color: isValidated == true ? Colors.cyan.shade400 : Colors.red,
                 width: 2.0 // White border for the enabled state
                 ),
           ),
@@ -59,21 +72,8 @@ class GenerateWidget {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
               color: Colors
-                  .blue.shade900, // White border when the field is focused
+                  .cyan.shade700, // White border when the field is focused
               width: 2.0, // Optional: you can increase the border width
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.red, // Red border for the error state
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.red, // Red border when focused with error
-              width: 2.0,
             ),
           ),
         ),

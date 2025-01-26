@@ -26,4 +26,14 @@ class TextStyles {
 
   TextStyle vaccineNames =
       const TextStyle(fontFamily: "RadioCanada", fontWeight: FontWeight.bold);
+
+  // My child page list tile text styles
+  TextStyle titleTextStyle = const TextStyle(
+      fontFamily: "Mali", fontSize: 16, fontWeight: FontWeight.bold);
+
+  TextStyle trailingTextStyle =
+      const TextStyle(fontFamily: "Mali", fontSize: 16, color: Colors.black);
+
+  TextStyle expansionTileTile =
+      const TextStyle(fontFamily: "RadioCanada", fontWeight: FontWeight.bold);
 }
