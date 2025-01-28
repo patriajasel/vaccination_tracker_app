@@ -13,6 +13,7 @@ import 'package:vaccination_tracker_app/pages/profile_page.dart';
 import 'package:vaccination_tracker_app/pages/setup_child.dart';
 import 'package:vaccination_tracker_app/pages/setup_guardian.dart';
 import 'package:vaccination_tracker_app/pages/setup_password.dart';
+import 'package:vaccination_tracker_app/services/notification_services.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 
 /** 
@@ -23,6 +24,8 @@ import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  NotificationServices().initializeNotification();
 
   final prefs = await SharedPreferences.getInstance();
   final isFirstTime = prefs.getBool('isFirstTime') ?? true;
