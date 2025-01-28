@@ -34,7 +34,7 @@ class StartPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: const Text(
-                'BakunaDo! App',
+                'VacCalendar App',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 25,
