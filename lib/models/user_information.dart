@@ -17,10 +17,10 @@ class UserInformation extends ChangeNotifier {
     name = '';
     email = '';
     profileImage = null;
-    children.clear();
     for (var child in children) {
       child.reset();
     }
+    children.clear();
     notifyListeners();
   }
 
@@ -101,51 +101,50 @@ class ChildVaccines extends ChangeNotifier {
   String pcv3Vaccine;
   String mmrVaccine;
 
-  String? bcgDate;
-  String? hepaDate;
-  String? opv1Date;
-  String? opv2Date;
-  String? opv3Date;
-  String? ipv1Date;
-  String? ipv2Date;
-  String? penta1Date;
-  String? penta2Date;
-  String? penta3Date;
-  String? pcv1Date;
-  String? pcv2Date;
-  String? pcv3Date;
-  String? mmrDate;
+  DateTime? bcgDate;
+  DateTime? hepaDate;
+  DateTime? opv1Date;
+  DateTime? opv2Date;
+  DateTime? opv3Date;
+  DateTime? ipv1Date;
+  DateTime? ipv2Date;
+  DateTime? penta1Date;
+  DateTime? penta2Date;
+  DateTime? penta3Date;
+  DateTime? pcv1Date;
+  DateTime? pcv2Date;
+  DateTime? pcv3Date;
+  DateTime? mmrDate;
 
-  ChildVaccines({
-    this.bcgVaccine = '',
-    this.hepaVaccine = '',
-    this.opv1Vaccine = '',
-    this.opv2Vaccine = '',
-    this.opv3Vaccine = '',
-    this.ipv1Vaccine = '',
-    this.ipv2Vaccine = '',
-    this.penta1Vaccine = '',
-    this.penta2Vaccine = '',
-    this.penta3Vaccine = '',
-    this.pcv1Vaccine = '',
-    this.pcv2Vaccine = '',
-    this.pcv3Vaccine = '',
-    this.mmrVaccine = '',
-    this.bcgDate = '',
-    this.hepaDate = '',
-    this.opv1Date = '',
-    this.opv2Date = '',
-    this.opv3Date = '',
-    this.ipv1Date = '',
-    this.ipv2Date = '',
-    this.penta1Date = '',
-    this.penta2Date = '',
-    this.penta3Date = '',
-    this.pcv1Date = '',
-    this.pcv2Date = '',
-    this.pcv3Date = '',
-    this.mmrDate = '',
-  });
+  ChildVaccines(
+      {this.bcgVaccine = '',
+      this.hepaVaccine = '',
+      this.opv1Vaccine = '',
+      this.opv2Vaccine = '',
+      this.opv3Vaccine = '',
+      this.ipv1Vaccine = '',
+      this.ipv2Vaccine = '',
+      this.penta1Vaccine = '',
+      this.penta2Vaccine = '',
+      this.penta3Vaccine = '',
+      this.pcv1Vaccine = '',
+      this.pcv2Vaccine = '',
+      this.pcv3Vaccine = '',
+      this.mmrVaccine = '',
+      this.bcgDate,
+      this.hepaDate,
+      this.opv1Date,
+      this.opv2Date,
+      this.opv3Date,
+      this.ipv1Date,
+      this.ipv2Date,
+      this.penta1Date,
+      this.penta2Date,
+      this.penta3Date,
+      this.pcv1Date,
+      this.pcv2Date,
+      this.pcv3Date,
+      this.mmrDate});
 
   void reset() {
     bcgVaccine = '';
@@ -163,5 +162,29 @@ class ChildVaccines extends ChangeNotifier {
     pcv3Vaccine = '';
     mmrVaccine = '';
     notifyListeners();
+  }
+
+  List<String> getTakenVaccines() {
+    Map<String, String> vaccines = {
+      "BCG": bcgVaccine,
+      "Hepa": hepaVaccine,
+      "OPV1": opv1Vaccine,
+      "OPV2": opv2Vaccine,
+      "OPV3": opv3Vaccine,
+      "IPV1": ipv1Vaccine,
+      "IPV2": ipv2Vaccine,
+      "Penta1": penta1Vaccine,
+      "Penta2": penta2Vaccine,
+      "Penta3": penta3Vaccine,
+      "PCV1": pcv1Vaccine,
+      "PCV2": pcv2Vaccine,
+      "PCV3": pcv3Vaccine,
+      "MMR": mmrVaccine,
+    };
+
+    return vaccines.entries
+        .where((entry) => entry.value == "Yes")
+        .map((entry) => entry.key)
+        .toList();
   }
 }

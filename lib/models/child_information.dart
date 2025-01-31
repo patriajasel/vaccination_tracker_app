@@ -24,7 +24,7 @@ class ChildInformation extends ChangeNotifier {
   // For Child's Information
   String childName;
   String? facilityNumber;
-  int childAge;
+  String childAge;
   String childGender;
   DateTime childBirthDate;
   String childBirthPlace;
@@ -57,7 +57,7 @@ class ChildInformation extends ChangeNotifier {
   void reset() {
     childName = "";
     facilityNumber = "";
-    childAge = 0;
+    childAge = "";
     childGender = "";
     childBirthDate = DateTime.now();
     childBirthPlace = "";
