@@ -47,6 +47,8 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final isLoading = ref.watch(isLoadingProvider);
+
     final themeColor = ref.watch(themeProvider);
     final secondaryColor = ref.watch(navIndicatorProvider);
 
@@ -116,17 +118,21 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
           ),
           body: Stack(
             children: [
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [themeColor, Colors.white],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
-              ),
+              isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [themeColor, Colors.white],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
               childData.children.isEmpty
                   ? const Center(
                       child:
@@ -976,6 +982,8 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                 ),
                 TextButton(
                   onPressed: () async {
+                    ref.read(isLoadingProvider.notifier).state = true;
+
                     final userID = FirebaseAuth.instance.currentUser!.uid;
 
                     if (selectedImage != null && selectedDefaultImage == null) {
@@ -990,6 +998,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                       childDefaultImages.insert(index, "");
 
                       if (context.mounted) {
+                        ref.read(isLoadingProvider.notifier).state = false;
                         Navigator.pop(context);
                       }
                     } else if (selectedImage == null &&
@@ -1017,11 +1026,14 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
 
                       reloadState();
                       if (context.mounted) {
+                        ref.read(isLoadingProvider.notifier).state = false;
                         Navigator.pop(context);
                       }
                     } else if (selectedDefaultImage == null &&
                         selectedImage == null) {
                       if (context.mounted) {
+                        ref.read(isLoadingProvider.notifier).state = false;
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content:
@@ -1029,6 +1041,8 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                         );
                       }
                     }
+
+                    ref.read(isLoadingProvider.notifier).state = false;
                   },
                   child: Text('Save',
                       style: TextStyle(color: Colors.cyan.shade700)),
@@ -1058,6 +1072,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
             ),
             ElevatedButton(
               onPressed: () async {
+                ref.read(isLoadingProvider.notifier).state = false;
                 await FirebaseFirestoreServices()
                     .deleteChildFromFirebase(userID, childID);
 
@@ -1065,6 +1080,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                 await FirebaseFirestoreServices().obtainUserData(userID, ref);
 
                 if (context.mounted) {
+                  ref.read(isLoadingProvider.notifier).state = false;
                   Navigator.pop(context);
                 }
               },

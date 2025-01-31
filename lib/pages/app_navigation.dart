@@ -34,6 +34,8 @@ class _AppNavigationState extends ConsumerState<AppNavigation> {
     final themeColor = ref.watch(themeProvider);
     final navigatorIndicator = ref.watch(navIndicatorProvider);
     return RefreshIndicator(
+      color: navigatorIndicator,
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
       onRefresh: () async {
         await Future.delayed(const Duration(seconds: 1));
         if (context.mounted) {

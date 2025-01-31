@@ -51,6 +51,7 @@ class _ChangePasswordPageState extends ConsumerState<ChangePasswordPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final themeColor = ref.watch(themeProvider);
+    final isLoading = ref.watch(isLoadingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -64,143 +65,163 @@ class _ChangePasswordPageState extends ConsumerState<ChangePasswordPage> {
       ),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [themeColor, Colors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: screenHeight * 0.1),
-            Image.asset(
-              'lib/assets/logos/change_password_logo.png',
-              scale: 2.5,
-            ),
-            SizedBox(height: screenHeight * 0.05),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: const Text(
-                'To update your password, please provide the following:',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16, fontFamily: "DMSerif", letterSpacing: 2),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.1),
+      body: Stack(
+        children: [
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [themeColor, Colors.white],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: screenHeight * 0.1),
+                      Image.asset(
+                        'lib/assets/logos/change_password_logo.png',
+                        scale: 2.5,
+                      ),
+                      SizedBox(height: screenHeight * 0.05),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.05),
+                        child: const Text(
+                          'To update your password, please provide the following:',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "DMSerif",
+                              letterSpacing: 2),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.1),
 
-            Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                    right: screenWidth * 0.1,
-                    left: screenWidth * 0.1),
-                child: GenerateWidget().createTextField(
-                    oldPassword,
-                    "Old Password",
-                    false,
-                    true,
-                    obscureTextOldPass,
-                    false,
-                    oldPassValidator,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: obscureTextOldPass == true
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    function: showOldPassword)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight * 0.01,
+                              right: screenWidth * 0.1,
+                              left: screenWidth * 0.1),
+                          child: GenerateWidget().createTextField(
+                              oldPassword,
+                              "Old Password",
+                              false,
+                              true,
+                              obscureTextOldPass,
+                              false,
+                              oldPassValidator,
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: obscureTextOldPass == true
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                              function: showOldPassword)),
 
-            Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                    right: screenWidth * 0.1,
-                    left: screenWidth * 0.1),
-                child: GenerateWidget().createTextField(
-                    newPassword,
-                    "New Password",
-                    false,
-                    true,
-                    obscureTextNewPass,
-                    false,
-                    newPassValidator,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: obscureTextNewPass == true
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    function: showNewPassword)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight * 0.01,
+                              right: screenWidth * 0.1,
+                              left: screenWidth * 0.1),
+                          child: GenerateWidget().createTextField(
+                              newPassword,
+                              "New Password",
+                              false,
+                              true,
+                              obscureTextNewPass,
+                              false,
+                              newPassValidator,
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: obscureTextNewPass == true
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                              function: showNewPassword)),
 
-            Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                    right: screenWidth * 0.1,
-                    left: screenWidth * 0.1),
-                child: GenerateWidget().createTextField(
-                    confirmNewPassword,
-                    "Confirm New Password",
-                    false,
-                    true,
-                    obscureTextConfirmNewPass,
-                    false,
-                    confirmNewPassValidator,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: obscureTextConfirmNewPass == true
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    function: showConfirmNewPass)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight * 0.01,
+                              right: screenWidth * 0.1,
+                              left: screenWidth * 0.1),
+                          child: GenerateWidget().createTextField(
+                              confirmNewPassword,
+                              "Confirm New Password",
+                              false,
+                              true,
+                              obscureTextConfirmNewPass,
+                              false,
+                              confirmNewPassValidator,
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: obscureTextConfirmNewPass == true
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                              function: showConfirmNewPass)),
 
-            SizedBox(height: screenHeight * 0.05),
+                      SizedBox(height: screenHeight * 0.05),
 
-            // This is for verifying the mobile number
-            ElevatedButton(
-              onPressed: () async {
-                bool isValidated = await validateTextFields();
-                if (!isValidated) {
-                  Fluttertoast.showToast(
-                      msg: "Required Fields are empty",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.SNACKBAR,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: 14.0);
-                } else {
-                  if (newPassword.text == confirmNewPassword.text) {
-                    String email = FirebaseAuth.instance.currentUser!.email!;
+                      // This is for verifying the mobile number
+                      ElevatedButton(
+                        onPressed: () async {
+                          ref.read(isLoadingProvider.notifier).state = true;
 
-                    await FirebaseAuthServices().updateUserPassword(
-                        email,
-                        oldPassword.text,
-                        confirmNewPassword.text,
-                        FirebaseAuth.instance.currentUser!);
+                          bool isValidated = await validateTextFields();
+                          if (!isValidated) {
+                            Fluttertoast.showToast(
+                                msg: "Required Fields are empty",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.SNACKBAR,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 14.0);
+                          } else {
+                            if (newPassword.text == confirmNewPassword.text) {
+                              String email =
+                                  FirebaseAuth.instance.currentUser!.email!;
 
-                    await FirebaseAuth.instance.signOut();
+                              await FirebaseAuthServices().updateUserPassword(
+                                  email,
+                                  oldPassword.text,
+                                  confirmNewPassword.text,
+                                  FirebaseAuth.instance.currentUser!);
 
-                    if (context.mounted) {
-                      Navigator.popUntil(context, (route) => route.isFirst);
-                    }
-                  }
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screenWidth * 0.5, screenHeight * 0.06),
-                  backgroundColor: Colors.cyan.shade300,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              child: const Text(
-                'Update Password',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: "DMSerif",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2),
-              ),
-            ),
-          ],
-        ),
+                              await FirebaseAuth.instance.signOut();
+
+                              if (context.mounted) {
+                                ref.read(isLoadingProvider.notifier).state =
+                                    false;
+                                Navigator.popUntil(
+                                    context, (route) => route.isFirst);
+                              }
+                            }
+                          }
+
+                          ref.read(isLoadingProvider.notifier).state = false;
+                        },
+                        style: ElevatedButton.styleFrom(
+                            fixedSize:
+                                Size(screenWidth * 0.5, screenHeight * 0.06),
+                            backgroundColor: Colors.cyan.shade300,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.all(10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text(
+                          'Update Password',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: "DMSerif",
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ],
       ),
     );
   }

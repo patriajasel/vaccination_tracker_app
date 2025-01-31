@@ -36,6 +36,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     double screenWidth = MediaQuery.of(context).size.width;
     final themeColor = ref.watch(themeProvider);
     final secondaryColor = ref.watch(navIndicatorProvider);
+    final isLoading = ref.watch(isLoadingProvider);
 
     var userInfo = ref.watch(rpUserInfo);
 
@@ -43,277 +44,301 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [themeColor, Colors.white], // Colors for the gradient
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: screenHeight * 0.075),
-                ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  minLeadingWidth: screenWidth * 0.1,
-                  leading: const Card(),
-                  title: Center(
-                    child: Text(
-                      "Profile",
-                      style: TextStyles().introTitle,
-                    ),
-                  ),
-                  titleAlignment: ListTileTitleAlignment.center,
-                  trailing: IconButton(
-                      onPressed: () {
-                        showSignOutDialog(context);
-                      },
-                      icon: Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: Colors.grey.shade800,
-                            blurRadius: 8,
-                            offset: const Offset(0, 0),
-                          )
-                        ],
-                      )),
-                ),
-
-                // Display Picture Section
-                SizedBox(height: screenHeight * 0.05),
-                Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: secondaryColor,
-                      ),
-                      padding: const EdgeInsets.all(5),
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundColor: Colors.white,
-                        child: profileUrl != "" && profileUrl != null
-                            ? ClipOval(
-                                child: Image.network(
-                                  profileUrl,
-                                  fit: BoxFit.cover,
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                ),
-                              )
-                            : const Icon(
-                                Icons.person,
-                                size: 80,
-                                color: Colors.black,
-                              ),
+        child: Stack(
+          children: [
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          themeColor,
+                          Colors.white
+                        ], // Colors for the gradient
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
                     ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                          style: IconButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder(
-                                side: BorderSide(
-                                    width: 2, color: secondaryColor)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: screenHeight * 0.075),
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          minLeadingWidth: screenWidth * 0.1,
+                          leading: const Card(),
+                          title: Center(
+                            child: Text(
+                              "Profile",
+                              style: TextStyles().introTitle,
+                            ),
                           ),
-                          onPressed: () {
-                            showChangeProfileImageDialog(
-                                context, screenWidth, screenHeight);
-                          },
-                          icon: Icon(
-                            Icons.photo_camera,
-                            color: Colors.pink.shade300,
-                            size: 25,
-                          )),
-                    )
-                  ],
-                ),
+                          titleAlignment: ListTileTitleAlignment.center,
+                          trailing: IconButton(
+                              onPressed: () {
+                                showSignOutDialog(context);
+                              },
+                              icon: Icon(
+                                Icons.logout,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.grey.shade800,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 0),
+                                  )
+                                ],
+                              )),
+                        ),
 
-                // User Basic Information
-                SizedBox(height: screenHeight * 0.01),
-                Text(
-                  userInfo.name,
-                  style: TextStyles().sectionTitle,
-                ),
-                SizedBox(height: screenHeight * 0.01),
-                Text(userInfo.email,
-                    style: const TextStyle(fontFamily: 'Mali', fontSize: 18)),
+                        // Display Picture Section
+                        SizedBox(height: screenHeight * 0.05),
+                        Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: secondaryColor,
+                              ),
+                              padding: const EdgeInsets.all(5),
+                              child: CircleAvatar(
+                                radius: 70,
+                                backgroundColor: Colors.white,
+                                child: profileUrl != "" && profileUrl != null
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          profileUrl,
+                                          fit: BoxFit.cover,
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                        ),
+                                      )
+                                    : const Icon(
+                                        Icons.person,
+                                        size: 80,
+                                        color: Colors.black,
+                                      ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: IconButton(
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: CircleBorder(
+                                        side: BorderSide(
+                                            width: 2, color: secondaryColor)),
+                                  ),
+                                  onPressed: () {
+                                    showChangeProfileImageDialog(
+                                        context, screenWidth, screenHeight);
+                                  },
+                                  icon: Icon(
+                                    Icons.photo_camera,
+                                    color: Colors.pink.shade300,
+                                    size: 25,
+                                  )),
+                            )
+                          ],
+                        ),
 
-                // General Settings Section
-                SizedBox(height: screenHeight * 0.05),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: const Offset(0, 0),
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  padding: EdgeInsets.symmetric(
-                      vertical: screenHeight * 0.01,
-                      horizontal: screenWidth * 0.05),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("General Settings",
-                        style:
-                            TextStyle(fontFamily: 'RadioCanada', fontSize: 18)),
-                  ),
-                ),
+                        // User Basic Information
+                        SizedBox(height: screenHeight * 0.01),
+                        Text(
+                          userInfo.name,
+                          style: TextStyles().sectionTitle,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Text(userInfo.email,
+                            style: const TextStyle(
+                                fontFamily: 'Mali', fontSize: 18)),
 
-                // Changing Email Address
-                SizedBox(height: screenHeight * 0.01),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ChangeEmailPage()));
-                    },
-                    leading: const Icon(Icons.email),
-                    title: const Text(
-                      "Change Email Address",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: const Icon(Icons.arrow_right),
-                  ),
-                ),
+                        // General Settings Section
+                        SizedBox(height: screenHeight * 0.05),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    Colors.grey.withAlpha((0.5 * 255).toInt()),
+                                spreadRadius: 1,
+                                blurRadius: 8,
+                                offset: const Offset(0, 0),
+                              ),
+                            ],
+                          ),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.01,
+                              horizontal: screenWidth * 0.05),
+                          child: const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("General Settings",
+                                style: TextStyle(
+                                    fontFamily: 'RadioCanada', fontSize: 18)),
+                          ),
+                        ),
 
-                // Changing Password
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const ChangePasswordPage()));
-                    },
-                    leading: const Icon(Icons.key),
-                    title: const Text(
-                      "Change Password",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: const Icon(Icons.arrow_right),
-                  ),
-                ),
+                        // Changing Email Address
+                        SizedBox(height: screenHeight * 0.01),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChangeEmailPage()));
+                            },
+                            leading: const Icon(Icons.email),
+                            title: const Text(
+                              "Change Email Address",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: const Icon(Icons.arrow_right),
+                          ),
+                        ),
 
-                // Changing Language
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: const ListTile(
-                    leading: Icon(Icons.translate),
-                    title: Text(
-                      "Language",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: Icon(Icons.arrow_right),
-                  ),
-                ),
+                        // Changing Password
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChangePasswordPage()));
+                            },
+                            leading: const Icon(Icons.key),
+                            title: const Text(
+                              "Change Password",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: const Icon(Icons.arrow_right),
+                          ),
+                        ),
 
-                // Information Section
-                SizedBox(height: screenHeight * 0.05),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withAlpha((0.5 * 255).toInt()),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: const Offset(0, 0),
-                      ),
-                    ],
-                  ),
-                  margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  padding: EdgeInsets.symmetric(
-                      vertical: screenHeight * 0.01,
-                      horizontal: screenWidth * 0.05),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Information",
-                        style:
-                            TextStyle(fontFamily: 'RadioCanada', fontSize: 18)),
-                  ),
-                ),
+                        // Changing Language
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: const ListTile(
+                            leading: Icon(Icons.translate),
+                            title: Text(
+                              "Language",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: Icon(Icons.arrow_right),
+                          ),
+                        ),
 
-                // Terms & Conditions
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const TermsAndConditionsPage()));
-                    },
-                    leading: const Icon(Icons.description),
-                    title: const Text(
-                      "Terms & Conditions",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: const Icon(Icons.arrow_right),
-                  ),
-                ),
+                        // Information Section
+                        SizedBox(height: screenHeight * 0.05),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    Colors.grey.withAlpha((0.5 * 255).toInt()),
+                                spreadRadius: 1,
+                                blurRadius: 8,
+                                offset: const Offset(0, 0),
+                              ),
+                            ],
+                          ),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.01,
+                              horizontal: screenWidth * 0.05),
+                          child: const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Information",
+                                style: TextStyle(
+                                    fontFamily: 'RadioCanada', fontSize: 18)),
+                          ),
+                        ),
 
-                // Privacy Policy
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PrivacyPolicyPage()));
-                    },
-                    leading: const Icon(Icons.privacy_tip),
-                    title: const Text(
-                      "Privacy Policy",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: const Icon(Icons.arrow_right),
-                  ),
-                ),
+                        // Terms & Conditions
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TermsAndConditionsPage()));
+                            },
+                            leading: const Icon(Icons.description),
+                            title: const Text(
+                              "Terms & Conditions",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: const Icon(Icons.arrow_right),
+                          ),
+                        ),
 
-                // About the App
-                SizedBox(height: screenHeight * 0.01),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AboutPage()));
-                    },
-                    leading: const Icon(Icons.smartphone),
-                    title: const Text(
-                      "About App",
-                      style: TextStyle(fontFamily: "Mali"),
-                    ),
-                    trailing: const Icon(Icons.arrow_right),
-                  ),
-                ),
-              ],
-            )),
+                        // Privacy Policy
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PrivacyPolicyPage()));
+                            },
+                            leading: const Icon(Icons.privacy_tip),
+                            title: const Text(
+                              "Privacy Policy",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: const Icon(Icons.arrow_right),
+                          ),
+                        ),
+
+                        // About the App
+                        SizedBox(height: screenHeight * 0.01),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1),
+                          child: ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const AboutPage()));
+                            },
+                            leading: const Icon(Icons.smartphone),
+                            title: const Text(
+                              "About App",
+                              style: TextStyle(fontFamily: "Mali"),
+                            ),
+                            trailing: const Icon(Icons.arrow_right),
+                          ),
+                        ),
+                      ],
+                    )),
+          ],
+        ),
       ),
     );
   }
@@ -456,6 +481,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 ),
                 TextButton(
                   onPressed: () async {
+                    ref.read(isLoadingProvider.notifier).state = true;
                     final userID = FirebaseAuth.instance.currentUser!.uid;
                     await FirebaseStorageServices()
                         .replaceProfileImage(selectedImage!, userID);
@@ -464,6 +490,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                         .getNewProfileImageLink(ref, userID);
 
                     if (context.mounted) {
+                      ref.read(isLoadingProvider.notifier).state = false;
                       Navigator.pop(context);
                     }
                   },

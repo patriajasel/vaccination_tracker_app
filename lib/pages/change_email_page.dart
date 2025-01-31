@@ -39,6 +39,7 @@ class _ChangeEmailPageState extends ConsumerState<ChangeEmailPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final themeColor = ref.watch(themeProvider);
+    final isLoading = ref.watch(isLoadingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,119 +54,141 @@ class _ChangeEmailPageState extends ConsumerState<ChangeEmailPage> {
       ),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [themeColor, Colors.white], // Colors for the gradient
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: screenHeight * 0.1),
-            Image.asset(
-              'lib/assets/logos/change_email_logo.png',
-              scale: 2.5,
-            ),
-            SizedBox(height: screenHeight * 0.05),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: const Text(
-                'To proceed updating your email address, please provide a valid email and enter current password of your account.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16, fontFamily: "DMSerif", letterSpacing: 2),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.1),
+      body: Stack(
+        children: [
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        themeColor,
+                        Colors.white
+                      ], // Colors for the gradient
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: screenHeight * 0.1),
+                      Image.asset(
+                        'lib/assets/logos/change_email_logo.png',
+                        scale: 2.5,
+                      ),
+                      SizedBox(height: screenHeight * 0.05),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.05),
+                        child: const Text(
+                          'To proceed updating your email address, please provide a valid email and enter current password of your account.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: "DMSerif",
+                              letterSpacing: 2),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.1),
 
-            Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                    right: screenWidth * 0.1,
-                    left: screenWidth * 0.1),
-                child: GenerateWidget().createTextField(
-                  newEmail,
-                  "New Email",
-                  false,
-                  true,
-                  false,
-                  false,
-                  newEmailValidator,
-                  prefixIcon: const Icon(Icons.alternate_email),
-                )),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight * 0.01,
+                              right: screenWidth * 0.1,
+                              left: screenWidth * 0.1),
+                          child: GenerateWidget().createTextField(
+                            newEmail,
+                            "New Email",
+                            false,
+                            true,
+                            false,
+                            false,
+                            newEmailValidator,
+                            prefixIcon: const Icon(Icons.alternate_email),
+                          )),
 
-            Padding(
-                padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                    right: screenWidth * 0.1,
-                    left: screenWidth * 0.1),
-                child: GenerateWidget().createTextField(
-                    confirmPassword,
-                    "Confirm your Password",
-                    false,
-                    true,
-                    obscureTextConfirm,
-                    false,
-                    confirmPasswordValidator,
-                    prefixIcon: const Icon(Icons.lock),
-                    suffixIcon: obscureTextConfirm == true
-                        ? const Icon(Icons.visibility)
-                        : const Icon(Icons.visibility_off),
-                    function: showConfirmPass)),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: screenHeight * 0.01,
+                              right: screenWidth * 0.1,
+                              left: screenWidth * 0.1),
+                          child: GenerateWidget().createTextField(
+                              confirmPassword,
+                              "Confirm your Password",
+                              false,
+                              true,
+                              obscureTextConfirm,
+                              false,
+                              confirmPasswordValidator,
+                              prefixIcon: const Icon(Icons.lock),
+                              suffixIcon: obscureTextConfirm == true
+                                  ? const Icon(Icons.visibility)
+                                  : const Icon(Icons.visibility_off),
+                              function: showConfirmPass)),
 
-            SizedBox(height: screenHeight * 0.05),
+                      SizedBox(height: screenHeight * 0.05),
 
-            // This is for verifying the mobile number
-            ElevatedButton(
-              onPressed: () async {
-                bool isValidated = await validateTextFields();
-                if (!isValidated) {
-                  Fluttertoast.showToast(
-                      msg: "Required Fields are empty",
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.SNACKBAR,
-                      backgroundColor: Colors.black,
-                      textColor: Colors.white,
-                      fontSize: 14.0);
-                } else {
-                  String email = FirebaseAuth.instance.currentUser!.email!;
+                      // This is for verifying the mobile number
+                      ElevatedButton(
+                        onPressed: () async {
+                          ref.read(isLoadingProvider.notifier).state = true;
+                          bool isValidated = await validateTextFields();
+                          if (!isValidated) {
+                            Fluttertoast.showToast(
+                                msg: "Required Fields are empty",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.SNACKBAR,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 14.0);
+                          } else {
+                            String email =
+                                FirebaseAuth.instance.currentUser!.email!;
 
-                  await FirebaseAuthServices().updateUserEmail(
-                      email,
-                      newEmail.text,
-                      confirmPassword.text,
-                      FirebaseAuth.instance.currentUser!);
+                            await FirebaseAuthServices().updateUserEmail(
+                                email,
+                                newEmail.text,
+                                confirmPassword.text,
+                                FirebaseAuth.instance.currentUser!);
 
-                  await FirebaseAuth.instance.signOut();
+                            await FirebaseAuth.instance.signOut();
 
-                  if (context.mounted) {
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                  }
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                  fixedSize: Size(screenWidth * 0.5, screenHeight * 0.06),
-                  backgroundColor: Colors.cyan.shade300,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10))),
-              child: const Text(
-                'Update Email',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: "DMSerif",
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2),
-              ),
-            ),
-          ],
-        ),
+                            if (context.mounted) {
+                              ref.read(isLoadingProvider.notifier).state =
+                                  false;
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+                            }
+                          }
+
+                          ref.read(isLoadingProvider.notifier).state = false;
+                        },
+                        style: ElevatedButton.styleFrom(
+                            fixedSize:
+                                Size(screenWidth * 0.5, screenHeight * 0.06),
+                            backgroundColor: Colors.cyan.shade300,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.all(10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: const Text(
+                          'Update Email',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: "DMSerif",
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+        ],
       ),
     );
   }

@@ -72,3 +72,5 @@ final themeProvider = StateProvider<Color>(
 final navIndicatorProvider = StateProvider<Color>(
   (ref) => Colors.cyan,
 );
+
+final isLoadingProvider = StateProvider<bool>((ref) => false);

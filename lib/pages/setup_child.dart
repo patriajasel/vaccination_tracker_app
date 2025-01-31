@@ -387,8 +387,8 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
                             right: screenWidth * 0.05,
                             left: screenWidth * 0.05),
                         child: GenerateWidget().createTextField(cHeight,
-                            "Height (cm)", false, true, false, true, true,
-                            maxLength: 3, hintText: "in cm")),
+                            "Height (cm)", false, true, false, false, true,
+                            hintText: "in cm")),
 
                     Padding(
                         padding: EdgeInsets.only(
@@ -396,8 +396,8 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
                             right: screenWidth * 0.05,
                             left: screenWidth * 0.05),
                         child: GenerateWidget().createTextField(cWeight,
-                            "Weight (kg)", false, true, false, true, true,
-                            maxLength: 2, hintText: "in kg")),
+                            "Weight (kg)", false, true, false, false, true,
+                            hintText: "in kg")),
 
                     SizedBox(height: screenHeight * 0.01),
 
