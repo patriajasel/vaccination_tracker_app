@@ -25,6 +25,8 @@ class FirebaseAuthServices {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+
       final userID = FirebaseAuth.instance.currentUser?.uid;
 
       await FirebaseFirestoreServices().createUserData(ref, userID!);
@@ -71,7 +73,18 @@ class FirebaseAuthServices {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      await Future.delayed(const Duration(seconds: 1));
+      if (FirebaseAuth.instance.currentUser?.emailVerified == false) {
+        await FirebaseAuth.instance.signOut();
+        Fluttertoast.showToast(
+            msg: "Please verify your email address first.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 14.0);
+      } else {
+        await Future.delayed(const Duration(seconds: 1));
+      }
     } on FirebaseAuthException catch (e) {
       String message = '';
       print("E-Code ${e.code}");

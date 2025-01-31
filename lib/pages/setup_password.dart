@@ -201,6 +201,15 @@ class _SetupPasswordState extends ConsumerState<SetupPassword> {
 
                     await FirebaseAuth.instance.signOut();
 
+                    Fluttertoast.showToast(
+                        msg:
+                            "A verification email was sent to your email address.",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.SNACKBAR,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 14.0);
+
                     if (context.mounted) {
                       Navigator.pushAndRemoveUntil(
                         context,
