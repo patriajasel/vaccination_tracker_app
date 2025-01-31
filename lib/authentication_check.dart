@@ -18,7 +18,7 @@ class AuthenticationCheck extends ConsumerWidget {
         } else if (snapshot.hasData) {
           return FutureBuilder<void>(
             future: FirebaseFirestoreServices()
-                .obtainUserData(snapshot.data!.uid, ref),
+                .obtainAllNeededData(snapshot.data!.uid, ref),
             builder: (context, futureSnapshot) {
               if (futureSnapshot.connectionState == ConnectionState.waiting) {
                 return Container(
