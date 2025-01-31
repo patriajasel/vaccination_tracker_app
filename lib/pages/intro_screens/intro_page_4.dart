@@ -39,7 +39,7 @@ class IntroPage4 extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
             child: Text(
-              'The app is 100% free with no hidden charges or in-app purchases.',
+              'The app is 100% free with no hidden charges or in-app purchases. It will only use minimal internet data for a smooth experience!',
               textAlign: TextAlign.center,
               style: TextStyles().introInfo,
             ),

@@ -54,7 +54,7 @@ class StartPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: const Text(
-                'VacCalendar is a free, easy-to-use mobile app designed to help parents and caregivers manage their child\'s vaccination schedules. With features like personalized reminders, health education on vaccines, and an offline mode, the app makes staying on top of your baby’s vaccination needs simple and stress-free.',
+                'VacCalendar is a free, easy-to-use mobile app designed to help parents and caregivers manage their child\'s vaccination schedules. With features like personalized reminders, health education on vaccines, and an online and offline mode of access, the app makes staying on top of your baby’s vaccination needs simple and stress-free.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, fontFamily: "Mali"),
               ),
