@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vaccination_tracker_app/models/user_information.dart';
 import 'package:vaccination_tracker_app/services/firebase_firestore_services.dart';
@@ -46,6 +47,8 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final themeColor = ref.watch(themeProvider);
+    final secondaryColor = ref.watch(navIndicatorProvider);
 
     final childData = ref.watch(rpUserInfo);
 
@@ -77,7 +80,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
         child: Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
-            backgroundColor: Colors.cyan.shade300,
+            backgroundColor: themeColor,
             centerTitle: true,
             title: Text(
               "My Child's Details",
@@ -92,11 +95,11 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                               childData.children.length > 1 ? 15 : 0),
                           topRight: Radius.circular(
                               childData.children.length > 1 ? 15 : 0)),
-                      color: Colors.cyan,
+                      color: secondaryColor,
                     ),
                     indicatorSize: TabBarIndicatorSize.tab,
                     unselectedLabelColor: Colors.blueGrey.shade700,
-                    dividerColor: Colors.cyan,
+                    dividerColor: secondaryColor,
                     labelColor: Colors.black,
                     labelStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
@@ -118,7 +121,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                 height: double.infinity,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.cyan.shade300, Colors.white],
+                    colors: [themeColor, Colors.white],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -134,10 +137,10 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                       childData.children.length,
                       (index) {
                         String? childImage =
-                            ref.watch(rpUserInfo).children[index].childImage;
+                            childData.children[index].childImage;
 
                         ChildVaccines vaccine =
-                            ref.watch(rpUserInfo).children[index].vaccines;
+                            childData.children[index].vaccines;
 
                         bool isVaccineComplete = checkVaccinesStatus(vaccine);
 
@@ -157,7 +160,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                         vertical: screenHeight * 0.05,
                                         horizontal: screenWidth * 0.05),
                                     decoration: BoxDecoration(
-                                        color: Colors.cyan,
+                                        color: secondaryColor,
                                         borderRadius:
                                             BorderRadius.circular(15)),
                                     child: Row(
@@ -213,17 +216,19 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                                     shape: CircleBorder(
                                                         side: BorderSide(
                                                             width: 2,
-                                                            color: Colors.cyan
-                                                                .shade400)),
+                                                            color:
+                                                                secondaryColor)),
                                                   ),
                                                   onPressed: () {
                                                     showChangeChildImageDialog(
-                                                      context,
-                                                      screenWidth,
-                                                      screenHeight,
-                                                      index,
-                                                      childImagePrefs,
-                                                    );
+                                                        context,
+                                                        screenWidth,
+                                                        screenHeight,
+                                                        index,
+                                                        childImagePrefs,
+                                                        childData
+                                                            .children[index]
+                                                            .childID);
                                                   },
                                                   icon: Icon(
                                                     Icons.photo_camera,
@@ -289,7 +294,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                       vertical: screenHeight * 0.025,
                                       horizontal: screenWidth * 0.05),
                                   decoration: BoxDecoration(
-                                      color: Colors.cyan,
+                                      color: secondaryColor,
                                       borderRadius: BorderRadius.circular(15)),
                                   child: Column(
                                     crossAxisAlignment:
@@ -467,7 +472,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: BCG'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.bcgVaccine == "Yes" ? "${vaccine.bcgDate}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.bcgVaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.bcgDate!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -500,7 +505,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: Hepatitis B'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.hepaVaccine == "Yes" ? "${vaccine.hepaDate}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.hepaVaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.hepaDate!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -553,7 +558,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: OPV 1'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.opv1Vaccine == "Yes" ? "${vaccine.opv1Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.opv1Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.opv1Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -563,7 +568,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: OPV 2'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.opv2Vaccine == "Yes" ? "${vaccine.opv2Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.opv2Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.opv2Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -573,7 +578,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: OPV 3'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.opv3Vaccine == "Yes" ? "${vaccine.opv3Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.opv3Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.opv3Date!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -618,7 +623,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: IPV 1'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.ipv1Vaccine == "Yes" ? "${vaccine.ipv1Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.ipv1Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.ipv1Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -628,7 +633,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: IPV 2'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.ipv2Vaccine == "Yes" ? "${vaccine.ipv2Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.ipv2Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.ipv2Date!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -682,7 +687,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: Pentavalent 1'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.penta1Vaccine == "Yes" ? "${vaccine.penta1Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.penta1Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.penta1Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -692,7 +697,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: Pentavalent 2'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.penta2Vaccine == "Yes" ? "${vaccine.penta2Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.penta2Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.penta2Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -702,7 +707,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: Pentavalent 3'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.penta3Vaccine == "Yes" ? "${vaccine.penta3Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.penta3Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.penta3Date!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -755,7 +760,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: PCV 1'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.pcv1Vaccine == "Yes" ? "${vaccine.pcv1Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.pcv1Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.pcv1Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -765,7 +770,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: PCV 2'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.pcv2Vaccine == "Yes" ? "${vaccine.pcv2Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.pcv2Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.pcv2Date!) : "Not Yet Taken"}'),
                                             ),
                                             ListTile(
                                               leading: const Icon(
@@ -775,7 +780,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: PCV 3'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.pcv3Vaccine == "Yes" ? "${vaccine.pcv3Date}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.pcv3Vaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.pcv3Date!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -806,7 +811,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                                               title: const Text(
                                                   'Vaccine Type: MMR'),
                                               subtitle: Text(
-                                                  'Date Taken: ${vaccine.mmrVaccine == "Yes" ? "${vaccine.mmrDate}" : "Not Yet Taken"}'),
+                                                  'Date Taken: ${vaccine.mmrVaccine == "Yes" ? DateFormat('MMM dd, yyy').format(vaccine.mmrDate!) : "Not Yet Taken"}'),
                                             ),
                                           ],
                                         ),
@@ -831,13 +836,8 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
     setState(() {});
   }
 
-  void showChangeChildImageDialog(
-    BuildContext context,
-    double screenWidth,
-    double screenHeight,
-    int index,
-    List<String> childImage,
-  ) {
+  void showChangeChildImageDialog(BuildContext context, double screenWidth,
+      double screenHeight, int index, List<String> childImage, String childID) {
     List<String> childDefaultImages = [];
 
     showDialog(
@@ -977,8 +977,6 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                 TextButton(
                   onPressed: () async {
                     final userID = FirebaseAuth.instance.currentUser!.uid;
-                    final childID =
-                        ref.watch(rpUserInfo).children[index].childID;
 
                     if (selectedImage != null && selectedDefaultImage == null) {
                       await FirebaseStorageServices().replaceChildProfileImage(
@@ -1063,6 +1061,7 @@ class _MyChildPageState extends ConsumerState<MyChildPage> {
                 await FirebaseFirestoreServices()
                     .deleteChildFromFirebase(userID, childID);
 
+                print("Obtaining user data from child page after delete");
                 await FirebaseFirestoreServices().obtainUserData(userID, ref);
 
                 if (context.mounted) {

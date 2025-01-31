@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vaccination_tracker_app/services/firebase_auth_services.dart';
+import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 import 'package:vaccination_tracker_app/utils/widget_generate.dart';
 
 class ChangeEmailPage extends ConsumerStatefulWidget {
@@ -30,6 +31,7 @@ class _ChangeEmailPageState extends ConsumerState<ChangeEmailPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final themeColor = ref.watch(themeProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -48,10 +50,7 @@ class _ChangeEmailPageState extends ConsumerState<ChangeEmailPage> {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.cyan.shade300,
-              Colors.white
-            ], // Colors for the gradient
+            colors: [themeColor, Colors.white], // Colors for the gradient
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),

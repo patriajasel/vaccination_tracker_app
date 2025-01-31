@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 import 'package:vaccination_tracker_app/utils/text_style.dart';
 
-class RhuPage extends StatefulWidget {
+class RhuPage extends ConsumerStatefulWidget {
   const RhuPage({super.key});
 
   @override
-  State<RhuPage> createState() => _RhuPageState();
+  ConsumerState<RhuPage> createState() => _RhuPageState();
 }
 
-class _RhuPageState extends State<RhuPage> {
+class _RhuPageState extends ConsumerState<RhuPage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final themeColor = ref.watch(themeProvider);
 
     final List<Map<String, dynamic>> vaccines = [
       {'title': 'BCG', 'checked': false},
@@ -37,10 +40,7 @@ class _RhuPageState extends State<RhuPage> {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Colors.cyan.shade300,
-                  Colors.white
-                ], // Colors for the gradient
+                colors: [themeColor, Colors.white], // Colors for the gradient
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),

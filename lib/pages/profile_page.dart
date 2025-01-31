@@ -34,6 +34,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final themeColor = ref.watch(themeProvider);
+    final secondaryColor = ref.watch(navIndicatorProvider);
 
     var userInfo = ref.watch(rpUserInfo);
 
@@ -45,10 +47,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Colors.cyan.shade300,
-                  Colors.white
-                ], // Colors for the gradient
+                colors: [themeColor, Colors.white], // Colors for the gradient
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -93,7 +92,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.cyan.shade400,
+                        color: secondaryColor,
                       ),
                       padding: const EdgeInsets.all(5),
                       child: CircleAvatar(
@@ -123,7 +122,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                             backgroundColor: Colors.white,
                             shape: CircleBorder(
                                 side: BorderSide(
-                                    width: 2, color: Colors.cyan.shade400)),
+                                    width: 2, color: secondaryColor)),
                           ),
                           onPressed: () {
                             showChangeProfileImageDialog(
@@ -347,6 +346,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 if (FirebaseAuth.instance.currentUser == null) {
                   if (context.mounted) {
                     ref.read(rpUserInfo).reset();
+
+                    print(
+                        "Sign out child length: ${ref.watch(rpUserInfo).children.length}");
 
                     Navigator.popUntil(context, (route) => route.isFirst);
 
