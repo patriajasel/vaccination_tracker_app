@@ -4,15 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vaccination_tracker_app/authentication_check.dart';
 import 'package:vaccination_tracker_app/firebase_options.dart';
-import 'package:vaccination_tracker_app/pages/change_email_page.dart';
-import 'package:vaccination_tracker_app/pages/change_password_page.dart';
+import 'package:vaccination_tracker_app/models/vaccine_data.dart';
 import 'package:vaccination_tracker_app/pages/intro_page.dart';
-import 'package:vaccination_tracker_app/pages/login_page.dart';
-import 'package:vaccination_tracker_app/pages/my_child_page.dart';
-import 'package:vaccination_tracker_app/pages/profile_page.dart';
-import 'package:vaccination_tracker_app/pages/setup_child.dart';
-import 'package:vaccination_tracker_app/pages/setup_guardian.dart';
-import 'package:vaccination_tracker_app/pages/setup_password.dart';
+import 'package:vaccination_tracker_app/services/json_services.dart';
 import 'package:vaccination_tracker_app/services/notification_services.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 
@@ -34,24 +28,32 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  List<VaccineData> vaccineData = await JsonServices().loadVaccineData();
+
   runApp(ProviderScope(
       child: VaccinationTrackerApp(
     isFirstTime: isFirstTime,
     childImage: childProfileImage,
+    vaccineData: vaccineData,
   )));
 }
 
 class VaccinationTrackerApp extends ConsumerWidget {
   final bool isFirstTime;
   final List<String>? childImage;
+  final List<VaccineData> vaccineData;
   const VaccinationTrackerApp(
-      {super.key, required this.isFirstTime, required this.childImage});
+      {super.key,
+      required this.isFirstTime,
+      required this.childImage,
+      required this.vaccineData});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future.microtask(() {
       if (childImage != null) {
         ref.read(childImageLink.notifier).state = childImage!;
+        ref.read(rpVaccineData.notifier).state = vaccineData;
       }
     });
 
