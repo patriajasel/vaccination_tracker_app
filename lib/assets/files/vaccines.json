@@ -1,0 +1,1204 @@
+{
+    "vaccines" : [
+        {
+            "vaccine" : "BCG",
+            "sections" : [
+                {
+                    "title": "What is the BCG vaccine, and how does it work?",
+                    "info" : "The BCG vaccine, which stands for Bacille Calmette-Guérin, has been protecting people for over 80 years. It’s mainly used to prevent serious forms of tuberculosis (TB) in children, like TB meningitis and widespread (disseminated) TB. When your baby receives this vaccine, it helps their immune system recognize and fight TB bacteria. While it doesn’t completely prevent TB infection, it reduces the risk of severe complications significantly.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "The BCG vaccine is given as a single injection, just under the skin of your baby’s upper right arm. It’s typically administered shortly after birth or during infancy, especially in areas where TB is common. The process is quick, and your healthcare provider will handle it with care.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you prepare before your baby receives the BCG vaccine?",
+                    "info" : "",
+                    "opening" : "If your baby will receive the BCG vaccine shortly after birth at a hospital or days later at a clinic or Rural Health Unit, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the BCG vaccine protects against TB. Healthcare staff will explain why it’s important for your baby."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "If you have concerns, feel free to ask the doctor or nurse or midwife  about the procedure and the vaccine’s effects."
+                        },
+                        {
+                            "bullet_title" : "Dress Your Baby Comfortably:",
+                            "more_info" : "Use loose or easy-to-remove clothing so healthcare workers can easily access your baby’s upper arm."
+                        },
+                        {
+                            "bullet_title" : "Ensure Your Baby is Healthy:",
+                            "more_info" : "Your baby should not have a fever or any active illness at the time of vaccination. Mild illnesses, like a common cold, are generally not contraindications,  but it's best to consult your healthcare provider."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby:",
+                            "more_info" : "Whether it’s in a hospital, clinic, or health center, keep your baby calm with gentle touches or skin-to-skin contact during the procedure."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "A small red bump might appear at the injection site, which is normal."
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the BCG vaccine?",
+                    "info" : "",
+                    "opening" : "As a parent, it’s natural to wonder what will happen after your baby gets the BCG vaccine. Here’s what to expect:",
+                    "ending" : "If anything seems unusual or if you’re worried, just let your doctor know.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "Expected Effects:",
+                            "bullets" : [
+                                "A small bump will show up at the injection site within a few weeks. Don’t worry—it’s normal.",
+                                "Over time, that bump might turn into a tiny sore or ulcer. This is just your baby’s immune system working. Eventually, it will form a scab, heal, and leave a small scar."
+                            ]
+                        },
+                        {
+                            "section": "Possible Side Effects:",
+                            "bullets" : [
+                                "The injection site might look a little red, swollen, or feel tender. This is common and not a cause for concern.",
+                                "In rare cases, the lymph nodes near the injection site might swell a bit.",
+                                "Serious reactions, like infections, are extremely rare and usually happen only if a baby has a weak immune system."
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you do after your baby gets the BCG vaccine?",
+                    "info" : "",
+                    "opening" : "Here are some simple tips to take care of your little one  after vaccination:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Provide Comfort Measures:",
+                            "bullets" : [
+                                "Offer your baby extra comfort and reassurance.",
+                                "Ensure your baby is well-fed."
+                            ]
+                        }, 
+                        {
+                            "title": "Check the Injection Site:",
+                            "bullets" : [
+                                "Keep it clean and dry.",
+                                "Avoid putting plasters over it. If a sore forms, cover it lightly with gauze to let air in.",
+                                "Do not apply any creams or ointments unless your doctor tells you to."
+                            ]
+                        },
+                        {
+                            "title": "Watch for Reactions:",
+                            "bullets" : [
+                                "Your baby might have a mild fever or feel a bit uncomfortable, which is normal. Lots of rest and fluids should help.",
+                                "If the fever doesn’t go away or gets too high, talk to your doctor right away"
+                            ]
+                        },
+                        {
+                            "title": "Follow-Up:",
+                            "bullets" : [
+                                "Some doctors might want to see your baby later to check how the vaccine is working."
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "Let’s clear up some common misconceptions about the BCG vaccine:",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "The BCG vaccine stops everyone from getting TB.",
+                                "The scar means something is wrong.",
+                                "Babies don’t need the BCG vaccine."
+                            ],
+                            "fact" : [
+                                "It helps protect kids from severe TB, but it doesn’t stop all TB infections, especially in adults.",
+                                "That little scar is completely normal. It’s proof the vaccine is doing its job!",
+                                "The vaccine works best when given to babies soon after birth."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        }, 
+
+
+        {
+            "vaccine" : "Hepatitis B",
+            "sections" : [
+                {
+                    "title": "What is the Hepatitis B Vaccine, and how does it work?",
+                    "info" : "Hepatitis B vaccine is used to prevent infection by the hepatitis B virus. The vaccine works by causing your baby’s body to produce its own protection (antibodies) against the disease. This prepares the body to fight off the actual virus if exposed. This vaccine is administered as a series of injections and it provides over 95% protection to your baby, with long-lasting immunity. It is essential for preventing your baby from having hepatitis B and its complications, including liver disease and cancer.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "",
+                    "opening" : "The Hepatitis B vaccine is given through injection into the upper part of the leg of your baby. It is usually given as part of the routine immunization schedule at the following intervals:",
+                    "ending" : "And another dose will be needed by your baby if the last dose was given at age <24 weeks",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section" : "",
+                            "bullets" : [
+                                "Within 24 hours of life of your baby",
+                                "At 7-14 weeks after the first dose (included in the Pentavalent Vaccine)",
+                                "Not earlier than 24 weeks or 6 months"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you prepare before your baby receives the Hepatitis B Vaccine?",
+                    "info" : "",
+                    "opening" : "If your baby will receive the Hepatitis B vaccine shortly after birth at a hospital or days later at a clinic or Rural Health Unit, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the Hepatitis B vaccine protects against Hepa B and is usually given shortly after birth."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "Speak with the doctor or nurse or midwife  if you have any concerns or need clarification about the vaccine."
+                        },
+                        {
+                            "bullet_title" : "Dress Your Baby Comfortably:",
+                            "more_info" : "Put your baby in loose or easy-to-remove clothing so the healthcare worker can easily access their upper arm."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "You can soothe your baby during the procedure with gentle touches or skin-to-skin contact."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "A small red bump may appear on the arm after the injection. This is normal and part of the healing process."
+                        },
+                        {
+                            "bullet_title" : "Bring Vaccination Records:",
+                            "more_info" : "Ensure you have a copy of your child’s health records to track the vaccination dates and doses received."
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the Hepatitis B Vaccine?",
+                    "info" : "",
+                    "opening" : "After receiving the Hepatitis B vaccine, your baby may experience:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Injection Site Reactions: ",
+                            "more_info" : "Mild pain, redness, or swelling at the injection site."
+                        },
+                        {
+                            "bullet_title" : "Low-Grade Fever:",
+                            "more_info" : "A slight increase in body temperature."
+                        },
+                        {
+                            "bullet_title" : "Irritability and Unsettled Behavior: ",
+                            "more_info" : "Your baby may be more fussy or cry more than usual."
+                        },
+                        {
+                            "bullet_title" : "Fatigue:",
+                            "more_info" : "Your baby might appear more tired or drowsy than usual."
+                        },
+                        {
+                            "bullet_title" : "Loss of Appetite:",
+                            "more_info" : "A temporary decrease in feeding."
+                        },
+                        {
+                            "bullet_title" : "Occasional Lump at Injection Site:",
+                            "more_info" : "A small, painless lump may form at the injection site, which usually resolves on its own."
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should I do after my child receives a vaccination?",
+                    "info" : "",
+                    "opening" : "Here are some simple tips to take care of your little one  after vaccination:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Monitor Some Common Side Effects to Your Baby",
+                            "bullets" : []
+                        }, 
+                        {
+                            "title": "Provide Comfort Measures:",
+                            "bullets" : [
+                                "Cuddling and Soothing: Offer your baby extra comfort and reassurance.",
+                                "Food: Ensure your baby is well-fed."
+                            ]
+                        },
+                        {
+                            "title": "Manage Fever and Discomfort:",
+                            "bullets" : [
+                                "Cool Compress: Apply a cool, damp cloth to the injection site of your baby to alleviate discomfort.",
+                                "Monitor Temperature: Keep an eye on your baby’s temperature. If a fever develops, consult your healthcare provider before administering any medication."
+                            ]
+                        },
+                        {
+                            "title": "When to Seek Medical Attention:",
+                            "bullets" : [
+                                "If your baby experiences severe allergic reactions, such as difficulty breathing, swelling of the face or throat, or a high fever.",
+                                "If side effects persist beyond a few days or worsen over time.",
+                                "Working"
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "Let’s clear up some common misconceptions about the Hepatitis B vaccine:",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "The hepatitis B vaccine is unnecessary for your baby.",
+                                "The hepatitis B vaccine can cause the disease to your baby.",
+                                "Vaccines, including the hepatitis B vaccine, are unsafe and can cause serious side effects.",
+                                "The hepatitis B vaccine is not part of the routine immunization schedule for babies in the Philippines.",
+                                "If a baby misses a dose of the hepatitis B vaccine, they need to start the series over.",
+                                "The hepatitis B vaccine is not effective in preventing the disease."
+                            ],
+                            "fact" : [
+                                "Hepatitis B is endemic in the Philippines, with a significant portion of the population affected. Vaccinating infants is crucial to prevent chronic infection and its severe complications, such as liver cirrhosis and liver cancer.",
+                                "The vaccine contains an inactivated virus, meaning it cannot cause hepatitis B infection. It is designed to stimulate the immune system to produce antibodies without causing the disease.",
+                                "The hepatitis B vaccine is generally safe. Common side effects are mild and may include pain at the injection site, low-grade fever, and irritability. Serious side effects are extremely rare.",
+                                "The hepatitis B vaccine is a standard part of the routine immunization schedule for infants in the Philippines, administered at birth, 6 weeks, and 14 weeks of age.",
+                                "If a dose is missed, the vaccination schedule should be resumed using minimal intervals between doses to catch up as quickly as possible.",
+                                "The hepatitis B vaccine is highly effective in preventing infection and its complications. Studies have shown a significant reduction in hepatitis B prevalence among vaccinated populations."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        },
+
+
+
+        {
+            "vaccine" : "OPV",
+            "sections" : [
+                {
+                    "title": "What is the Oral Polio Vaccine (OPV), and how does it work?",
+                    "info" : "The Oral Polio Vaccine (OPV) is a live attenuated vaccine used to protect children from polio, a serious viral disease that can cause paralysis or even death. OPV works by helping your child’s immune system recognize and fight off the poliovirus. While it doesn’t completely prevent the virus from entering the body, it significantly reduces the risk of severe complications and stops its spread within the community.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is the OPV given?",
+                    "info" : "",
+                    "opening" : "The OPV is administered orally, meaning it’s given as drops in the mouth, making it painless and needle-free. It is usually given as part of the routine immunization schedule at the following intervals:",
+                    "ending" : "In special situations, like a polio outbreak, additional booster doses may also be provided.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section" : "",
+                            "bullets" : [
+                                "At 6 weeks or 1 ½ months old",
+                                "At 10 weeks or 2 ½ months old",
+                                "At 14 weeks or 3 ½ months old"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you do to prepare before your baby receives the OPV?",
+                    "info" : "",
+                    "opening" : "Before your baby receives the Oral Polio Vaccine, it's important to take certain steps to ensure their safety and the vaccine's effectiveness, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the Oral Polio Vaccine protects against Polio. Healthcare staff will explain why it’s important for your baby."
+                        },
+                        {
+                            "bullet_title" : "Share Medical Information: ",
+                            "more_info" : "Inform your healthcare provider about any allergies, medical history, or reactions to previous vaccines."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "If you have concerns, feel free to ask the doctor or nurse about the procedure and the vaccine’s effects."
+                        },
+                        {
+                            "bullet_title" : "Ensure your Baby is Healthy:",
+                            "more_info" : "Your baby should not have a fever or any active illness at the time of vaccination. Mild illnesses, like a common cold, are generally not contraindications,  but it's best to consult your healthcare provider."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "Whether it’s in a hospital, clinic, or health center, keep your baby calm with gentle touches or skin-to-skin contact during the procedure."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "Understand the common side effects, such as mild diarrhea or gastrointestinal discomfort following OPV administration. Know the appropriate measures to manage these side effects at home."
+                        }
+                        
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the OPV?",
+                    "info" : "",
+                    "opening" : "After receiving the Hepatitis B vaccine, your baby may experience:",
+                    "ending" : "If severe symptoms occur, such as difficulty breathing, swelling, or severe allergic reactions, seek medical attention immediately.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "Expected Effects:",
+                            "bullets" : [
+                                "Mild diarrhea (rare): This can occur as the vaccine interacts with the gut. It typically resolves on its own within a day or two.",
+                                "Irritability or fussiness: This may be due to mild discomfort, which is a normal response as the immune system reacts to the vaccine.",
+                                "Temporary loss of appetite: Some children might eat less for a short period after the vaccine, but this usually returns to normal quickly.",
+                                "Mild Allergies: Rarely, some children may develop mild allergic reactions, such as redness or itching."
+                            ]
+                        },
+                        {
+                            "section": "Rare Side Effects:",
+                            "bullets" : [
+                                "Vaccine-Associated Paralytic Poliomyelitis (VAPP): This is an extremely rare condition where the weakened virus in the vaccine mutates and causes polio-like symptoms. It happens in approximately 1 in 2.4 million doses and is more likely in individuals with weakened immune systems."
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you do after your baby receives the OPV?",
+                    "info" : "",
+                    "opening" : "Here are some simple tips to take care of your little one  after vaccination:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Monitor for side effects:",
+                            "bullets" : [
+                                "Watch for signs of an allergic reaction, such as hives, swelling, or breathing difficulty.",
+                                "If mild diarrhea occurs, provide plenty of fluids to keep your baby hydrated.",
+                                "Monitor their appetite and mood, as both usually improve within a day or two."
+                            ]
+                        }, 
+                        {
+                            "title": "Watch out:",
+                            "bullets" : [
+                                "Watch for symptoms such as unusual weakness, paralysis, or difficulty moving parts of the body.",
+                                "Seek medical attention immediately if you notice any of these signs."
+                            ]
+                        },
+                        {
+                            "title": "Follow up:",
+                            "bullets" : [
+                                "Keep track of your child’s vaccination schedule to ensure all doses are received. Inform your healthcare provider if side effects persist beyond a few days. "
+                            ]
+                        },
+                        {
+                            "title": "When to Seek Medical Attention:",
+                            "bullets" : [
+                                "If your baby experiences severe allergic reactions, such as difficulty breathing, swelling of the face or throat, or a high fever.",
+                                "If side effects persist beyond a few days or worsen over time.",
+                                "Working"
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "True or False: Common misconceptions and facts about the OPV vaccine",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "If you have questions or concerns, your healthcare provider will be happy to guide you.",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "OPV provides lifelong protection with just one dose.",
+                                "OPV causes polio in children.",
+                                "OPV cannot be given to children older than 5 years."
+                            ],
+                            "fact" : [
+                                "Multiple doses of OPV are necessary to ensure full immunity and protection against all types of poliovirus.",
+                                "OPV is safe for the vast majority of children. The risk of vaccine-derived poliovirus is extremely low and can be reduced further with high vaccination coverage.",
+                                "OPV can be administered to older children and adults during outbreaks or as a booster dose."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        },
+
+
+        {
+            "vaccine" : "IPV",
+            "sections" : [
+                {
+                    "title": "What is the Inactivated Polio Vaccine, and how does it work?",
+                    "info" : "The Inactivated Polio Vaccine (IPV) helps protect against polio, a serious disease that can cause paralysis. It contains a killed form of the poliovirus was developed by Dr. Jonas Salk in 1955, which cannot cause polio but helps the body produce protection (antibodies) against the disease.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "The administration of IPV is given as 0.5 mL dose, injected into the thigh. It is usually given as part of the routine immunization schedule at your baby’s 14th week of life or 3 ½ months.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you do to prepare before your child receives the IPV vaccine?",
+                    "info" : "",
+                    "opening" : "Before your baby receives the Oral Polio Vaccine, it's important to take certain steps to ensure their safety and the vaccine's effectiveness, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the Inactivated Polio Vaccine protects against Polio. Healthcare staff will explain why it’s important for your baby."
+                        },
+                        {
+                            "bullet_title" : "Share Medical Information: ",
+                            "more_info" : "Inform your healthcare provider about any allergies, medical history, or reactions to previous vaccines."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "If you have concerns, feel free to ask the doctor or nurse about the procedure and the vaccine’s effects.."
+                        },
+                        {
+                            "bullet_title" : "Dress your Baby Comfortably:",
+                            "more_info" : "Use loose or easy-to-remove clothing so healthcare workers can easily access your baby’s thigh."
+                        },
+                        {
+                            "bullet_title" : "Ensure your Baby is Healthy:",
+                            "more_info" : "Your baby should not have a fever or any active illness at the time of vaccination. Mild illnesses, like a common cold, are generally not contraindications,  but it's best to consult your healthcare provider."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "Whether it’s in a hospital, clinic, or health center, keep your baby calm with gentle touches or skin-to-skin contact during the procedure."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "Understand the common side effects, such as fever, mild pain or redness at the injection site. Know the appropriate measures to manage these side effects at home."
+                        }
+                        
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the IPV vaccine?",
+                    "info" : "",
+                    "opening" : "The IPV vaccine is completely safe with very few side effects that respond to common therapies.",
+                    "ending" : "These side effects are typically mild and resolve on their own. If any of these symptoms persist or cause concern, it is advisable to consult the nearest healthcare professional.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "Expected Effects:",
+                            "bullets" : [
+                                "Mild Pain or Redness at the Injection Site: Some children may experience mild pain, redness, or swelling at the injection site.",
+                                "Fever: A low-grade fever may occur after vaccination."
+                            ]
+                        },
+                        {
+                            "section": "Rare Side Effects:",
+                            "bullets" : [
+                                "Allergic Reactions: Although extremely rare, some children may experience allergic reactions, including hives, difficulty breathing, or swelling of the face and throat."
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you do after your child receives a vaccination?",
+                    "info" : "",
+                    "opening" : "Here are some simple tips to take care of your little one after vaccination:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Monitor for side effects:",
+                            "bullets" : [
+                                "If signs of a severe allergic reaction appear (e.g., swelling, difficulty breathing, rash), seek emergency medical care."
+                            ]
+                        }, 
+                        {
+                            "title": "Comfort your child:",
+                            "bullets" : [
+                                "Soothe them with cuddling, feeding, or calm activities.",
+                                "Create a quiet and comfortable environment."
+                            ]
+                        },
+                        {
+                            "title": "Manage pain and fever:",
+                            "bullets" : [
+                                "Apply a cool compress to the injection site for pain or swelling.",
+                                "Offer paracetamol if needed, as recommended by your healthcare provider."
+                            ]
+                        },
+                        {
+                            "title": "Encourage fluids and rest:",
+                            "bullets" : [
+                                "Keep your child hydrated by offering plenty of fluids.",
+                                "Let them rest if they feel tired or unwell."
+                            ]
+                        },
+                        {
+                            "title": "Follow up:",
+                            "bullets" : [
+                                "Keep track of your child’s vaccination schedule to ensure all doses are received.",
+                                "Inform your pediatrician if side effects persist beyond a few days."
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "True or False: Common misconceptions and the facts about the IPV Vaccine.",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "It can cause polio since IPV contains the virus.",
+                                "There is no reason to be vaccinated for polio anymore because it has been eliminated from the entire world."
+                            ],
+                            "fact" : [
+                                "False. Ultimately, IPV has a composition of inactivated or ‘killed’ poliovirus; therefore cannot cause polio. ",
+                                "Although poliomyelitis seems to be no more around in the world today, statistics show that it has not been totally eradicated worldwide. The public should sustain high vaccination to help prevent the virus from reemerging again."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        },
+
+
+        {
+            "vaccine" : "PCV",
+            "sections" : [
+                {
+                    "title": "What is the Pneumococcal Conjugate Vaccine (PCV), and how does it work?",
+                    "info" : "The Pneumococcal Conjugate Vaccine (PCV) is a vaccine that helps protect your baby from serious infections caused by a bacteria called Streptococcus pneumoniae. These infections can cause illnesses like pneumonia (lung infection), meningitis (infection of the brain and spinal cord), and sepsis (blood infection), which can be very dangerous for babies and young children.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "",
+                    "opening" : "The Hepatitis B vaccine is given through injection into the upper part of the leg of your baby. It is usually given as part of the routine immunization schedule at the following intervals:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "title": "",
+                            "bullets" : [
+                                "At 6 weeks or 1 ½ months old",
+                                "At 10 weeks or 2 ½ months old",
+                                "At 14 weeks or 3 ½ months old"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you prepare before your baby receives the Pneumococcal Conjugate Vaccine (PCV)?",
+                    "info" : "",
+                    "opening" : "If your baby will receive the shortly after birth at Pneumococcal Conjugate Vaccine (PCV) a hospital or days later at a clinic or Rural Health Unit, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the Pentavalent Vaccine protects against Hepa B and is usually given shortly after birth. "
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "Speak with the doctor or nurse if you have any concerns or need clarification about the vaccine."
+                        },
+                        {
+                            "bullet_title" : "Dress your Baby Comfortably:",
+                            "more_info" : "Put your baby in loose or easy-to-remove clothing so the healthcare worker can easily access their upper arm."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "You can soothe your baby during the procedure with gentle touches or skin-to-skin contact."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "A small red bump may appear on the arm after the injection. This is normal and part of the healing process."
+                        },
+                        {
+                            "bullet_title" : "Bring Vaccination Records: ",
+                            "more_info" : "Ensure you have a copy of your child’s health records to track the vaccination dates and doses received."
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the PCV vaccine?",
+                    "info" : "",
+                    "opening" : "After receiving the PCV, your baby may experience mild side effects, which are generally short-lived and resolve within a few days. These include:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Injection Site Reactions:",
+                            "more_info" : "Redness, tenderness, or swelling at the site where the shot was given."
+                        },
+                        {
+                            "bullet_title" : "Fever:",
+                            "more_info" : "A mild fever may occur after vaccination."
+                        },
+                        {
+                            "bullet_title" : "Irritability:",
+                            "more_info" : "Some babies may become fussy or irritable following the vaccine."
+                        },
+                        {
+                            "bullet_title" : "Decreased Appetite:",
+                            "more_info" : "A slight reduction in appetite can occur temporarily."
+                        },
+                        {
+                            "bullet_title" : "Sleepiness:",
+                            "more_info" : "Your baby might feel sleepier than usual."
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should I do after my child receives a vaccination?",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                         
+                        {
+                            "title": "Comfort Your Baby:",
+                            "bullets" : [
+                                "Hold or cuddle your baby to comfort them if they feel fussy or upset after the vaccine."
+                            ]
+                        },
+                        {
+                            "title": "Monitor for side effects:",
+                            "bullets" : [
+                                "Keep an eye out for any side effects like fever, redness, swelling, or tenderness at the injection site. These are common and usually go away after a few days."
+                            ]
+                        },
+                        {
+                            "title": "Manage pain and fever:",
+                            "bullets" : [
+                                "Apply a cool compress to the injection site for pain or swelling.",
+                                "Offer paracetamol if needed, as recommended by your healthcare provider."
+                            ]
+                        },
+                        {
+                            "title": "Offer Fluids:",
+                            "bullets" : [
+                                "Breastfeed or bottle-feed your baby more often to keep them hydrated"
+                            ]
+                        },
+                        {
+                            "title": "Manage Fever and Discomfort:",
+                            "bullets" : [
+                                "If your baby has a mild fever, you can give acetaminophen (paracetamol) for babies, but only if recommended by your healthcare provider. Make sure to follow the proper dosage based on your baby's age and weight."
+                            ]
+                        },
+                        {
+                            "title": "Record the Vaccination",
+                            "bullets" : [
+                                "Update your baby’s immunization record or booklet with the date and details of the vaccine."
+                            ]
+                        },
+                        {
+                            "title": "Follow Up with Your Healthcare Provider",
+                            "bullets" : [
+                                "If you have any concerns or if your baby experiences unusual symptoms, contact your healthcare provider for advice."
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "True or False: Common misconceptions and the facts about the PCV vaccine.",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "Only children need the PCV vaccine.",
+                                "You only need one PCV vaccine.",
+                                "The PCV vaccine is only for children.",
+                                "The PCV vaccine is not effective for older people"
+                            ],
+                            "fact" : [
+                                "Adults also need the PCV vaccine, especially those 50 and older.",
+                                "You need multiple doses of the PCV vaccine, usually one year apart.",
+                                "The PCV vaccine protects both children and adults.",
+                                "The PCV vaccine's effectiveness decreases with age, but it can still be effective for older people.",
+                                "The PCV vaccine protects against pneumococcal disease, a serious illness that can affect anyone.",
+                                "The PCV vaccine is safe, and the risk of side effects is small.", 
+                                "The PCV vaccine is made from a small piece of the germ that causes pneumococcal disease, so it can't cause the disease itself."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        },
+
+
+        {
+            "vaccine" : "MMR",
+            "sections" : [
+                {
+                    "title": "What is the MMR Vaccine (Measles, Mumps, Rubella), and how does it work?",
+                    "info" : "The MMR or Measles, Mumps, and Rubella vaccine is a combined vaccine that protects against three serious viral infections (Measles, Mumps, and Rubella). The vaccine works by initiating an immune response that protects you against viruses.",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "",
+                    "opening" : "The MMR vaccine is given through injection into the child’s upper arm or thigh, they usually receive two doses:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "",
+                            "bullets" : [
+                                "At 12-15 months of age",
+                                "At 4-6 years of age."
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should I do to prepare before my child receives the MMR Vaccine?",
+                    "info" : "",
+                    "opening" : "If your baby will receive the MMR vaccine shortly after birth at a hospital or days later at a clinic or Rural Health Unit, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "The MMR vaccine protects your child from measles, mumps, rubella, and also chickenpox."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "Speak with the doctor or nurse or midwife  if you have any concerns or need clarification about the vaccine."
+                        },
+                        {
+                            "bullet_title" : "Dress your Baby Comfortably:",
+                            "more_info" : "Put your baby in loose or easy-to-remove clothing so the healthcare worker can easily access their upper arm."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "You can soothe your baby during the procedure with gentle touches or skin-to-skin contact."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "A small red bump may appear on the arm after the injection. This is normal and part of the healing process."
+                        },
+                        {
+                            "bullet_title" : "Bring Vaccination Records:",
+                            "more_info" : "Ensure you have a copy of your child’s health records to track the vaccination dates and doses received."
+                        }
+                        
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the MMR Vaccine?",
+                    "info" : "",
+                    "opening" : "For children who do receive the MMR vaccine, common side effects include:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Injection Site Reactions: ",
+                            "more_info" : "Redness, swelling, or tenderness at the site where the shot was given."
+                        },
+                        {
+                            "bullet_title" : "Fever: ",
+                            "more_info" : "A mild fever may occur after vaccination."
+                        },
+                        {
+                            "bullet_title" : "Rash: ",
+                            "more_info" : "A mild rash can develop about a week or two after the shot."
+                        },
+                        {
+                            "bullet_title" : "Swollen Cheeks: ",
+                            "more_info" : "Some babies may experience swelling of the cheeks."
+                        },
+                        {
+                            "bullet_title" : "Febrile Seizures: ",
+                            "more_info" : "A very small risk of febrile seizures exists, but these are rare. "
+                        }
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should I do after my child receives a vaccination?",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "",
+                            "bullets" : [
+                                "Put ice or cold packs in the area for 10-20 minutes. ",
+                                "Make sure your child is not wearing too many layers of clothes",
+                                "Give them plenty of water",
+                                "If these symptoms persist, contact your doctor",
+                                "Severe allergic reactions; hives, swelling of the face or throat, difficulty breathing, and/or dizziness"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Comfort Your Baby",
+                            "bullets" : [
+                                "Hold or cuddle your baby if they feel fussy or upset after the vaccination. Offering a pacifier or favorite toy can help soothe them."
+                            ]
+                        },
+                        {
+                            "title": "Monitor for side effects",
+                            "bullets" : [
+                                "Keep an eye out for common side effects such as fever, rash, or swelling at the injection site. These are usually mild and go away within a few days."
+                            ]
+                        },
+                        {
+                            "title": "Manage Fever",
+                            "bullets" : [
+                                "If your baby develops a mild fever (below 38.5°C), offer breastmilk or bottled milk to keep them hydrated and dress them comfortably.",
+                                "A lukewarm bath can also help lower the fever.",
+                                "You can give acetaminophen (paracetamol) for babies if recommended by your healthcare provider."
+                            ]
+                        },
+                        {
+                            "title": "Watch for Severe Reactions",
+                            "bullets" : [
+                                "Severe reactions are rare, but if you notice the following, seek immediate medical help:",
+                                "Difficulty breathing or swelling of the face or throat",
+                                "High fever (above 39.4°C or 103°F)",
+                                "Severe rash or unusual skin reactions",
+                                "Extreme irritability or lethargy"
+                            ]
+                        },
+                        {
+                            "title": "Record the Vaccine",
+                            "bullets" : [
+                                "Make sure to update your baby’s immunization record with the details of the vaccine, including the date and batch number of the vaccine administered."
+                            ]
+                        },
+                        {
+                            "title": "Consult Your Healthcare Provider",
+                            "bullets" : [
+                                "If you have any concerns about side effects or notice any severe reactions, contact your healthcare provider for further guidance and reassurance."
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "True or False: Common misconceptions and the facts about the MMR Vaccine.",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "The MMR vaccine causes autism",
+                                "The spread of Measles can be controlled by proper sanitation.",
+                                "The MMR vaccine causes the Measles"
+                            ],
+                            "fact" : [
+                                "There is no evidence that shows the MMR vaccine causes autism. Many studies showed that there is no connection between autism and the MMR vaccine.",
+                                "Proper sanitation has minimal effect on measles. Measles spread from person to person and through air.",
+                                "The MMR vaccine does not cause the Measles. Although it is made from a live virus which is weakened, so that it doesn’t cause the disease but rather causes the immune system to recognize the virus and develop immunity to it."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        },
+
+        {
+            "vaccine" : "Pentavalent",
+            "sections" : [
+                {
+                    "title": "What is the Pentavalent Vaccine, and how does it work?",
+                    "info" : "",
+                    "opening" : "The Pentavalent vaccine is a combination vaccine that protects against five serious diseases:",
+                    "ending" : "This vaccine works by stimulating the immune system to produce antibodies against these diseases. It helps the body “learn” how to fight these pathogens if exposed to them in the future. The vaccine provides immunity without causing the diseases themselves.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "",
+                            "bullets" : [
+                                "Diphtheria",
+                                "Tetanus",
+                                "Pertussis (Whooping Cough)",
+                                "Hepatitis B",
+                                "Haemophilus influenzae type b (Hib), which can cause meningitis, pneumonia, and other infections."
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "How is it given?",
+                    "info" : "",
+                    "opening" : "The Pentavalent vaccine is administered as an injection into the muscle, usually in your baby’s thigh. It is given in a series of three doses at specific intervals:",
+                    "ending" : "In some cases, booster doses may be required in later years to maintain immunity.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "",
+                            "bullets" : [
+                                "For infants: Usually in the thigh.",
+                                "For older children: In the upper arm.",
+                                "At 6 weeks or 1 ½ months old",
+                                "At 10 weeks or 2 ½ months old",
+                                "At 14 weeks or 3 ½ months old"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should you prepare before my baby receives the Pentavalent Vaccine?",
+                    "info" : "",
+                    "opening" : "Before your baby receives the Pentavalent vaccine, it's important to take certain steps to ensure their safety and the vaccine's effectiveness, here’s how you can prepare:",
+                    "ending" : "",
+                    "bullets" : [
+                        {
+                            "bullet_title" : "Understand the Vaccine:",
+                            "more_info" : "Know that the Pentavalent Vaccine protects against 5 preventable diseases. Healthcare staff will explain why it’s important for your baby."
+                        },
+                        {
+                            "bullet_title" : "Ask Questions:",
+                            "more_info" : "If you have concerns, feel free to ask the doctor or nurse or midwife about the procedure and the vaccine’s effects."
+                        },
+                        {
+                            "bullet_title" : "Dress your Baby Comfortably:",
+                            "more_info" : "Use loose or easy-to-remove clothing so healthcare workers can easily access your baby’s upper arm."
+                        },
+                        {
+                            "bullet_title" : "Ensure your Baby is Healthy:",
+                            "more_info" : "Your baby should not have a fever or any active illness at the time of vaccination. Mild illnesses, like a common cold, are generally not contraindications,  but it's best to consult your healthcare provider."
+                        },
+                        {
+                            "bullet_title" : "Stay Calm and Comfort Your Baby: ",
+                            "more_info" : "Whether it’s in a hospital, clinic, or health center, keep your baby calm with gentle touches or skin-to-skin contact during the procedure."
+                        },
+                        {
+                            "bullet_title" : "Know What to Expect Afterward:",
+                            "more_info" : "Understand the common side effects, such as mild fever or soreness at the injection site. Know the appropriate measures to manage these side effects at home."
+                        }
+                        
+                    ],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "What are the expected effects and side effects of the Pentavalent Vaccine?",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "If any of these serious side effects occur, seek immediate medical attention.",
+                    "bullets" : [],
+                    "titled_bullets" : [
+                        {
+                            "section": "Common Side Effects (usually mild and temporary):",
+                            "bullets" : [
+                                "Pain, redness, or swelling at the injection site",
+                                "Low-grade fever (mild fever)",
+                                "Fussiness or irritability",
+                                "Decreased appetite",
+                                "Vomiting or diarrhea (occasionally)"
+                            ]
+                        },
+                        {
+                            "section": "Serious side effects (rare):",
+                            "bullets" : [
+                                "Severe allergic reactions (anaphylaxis), such as difficulty breathing or swelling of the face or throat",
+                                "Seizures (usually caused by a high fever, although very rare)",
+                                "Persistent crying (more than 3 hours, rare)",
+                                "Severe or High fever (over 40°C or 104°F, rare)"
+                            ]
+                        }
+                    ],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : []
+                },
+                {
+                    "title": "What should I do after my child receives a vaccination?",
+                    "info" : "",
+                    "opening" : "Here are some simple tips to take care of your little one after vaccination:",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [
+                        {
+                            "title": "Monitor for side effects:",
+                            "bullets" : [
+                                "Observe your child for 24–48 hours after the vaccination.",
+                                "If signs of a severe allergic reaction appear (e.g., swelling, difficulty breathing, rash), seek emergency medical care."
+                            ]
+                        }, 
+                        {
+                            "title": "Comfort your child:",
+                            "bullets" : [
+                                "Soothe them with cuddling, feeding, or calm activities.",
+                                "Create a quiet and comfortable environment."
+                            ]
+                        },
+                        {
+                            "title": "Manage pain and fever:",
+                            "bullets" : [
+                                "Apply a cool compress to the injection site for pain or swelling.",
+                                "Offer paracetamol if needed, as recommended by your healthcare provider."
+                            ]
+                        },
+                        {
+                            "title": "Encourage fluids and rest:",
+                            "bullets" : [
+                                "Keep your child hydrated by offering plenty of fluids.",
+                                "Let them rest if they feel tired or unwell."
+                            ]
+                        },
+                        {
+                            "title": "Follow up:",
+                            "bullets" : [
+                                "Keep track of your child’s vaccination schedule to ensure all doses are received.",
+                                "Inform your pediatrician if side effects persist beyond a few days."
+                            ]
+                        }
+                    ],
+                    "misc_and_fact" : []
+                }, 
+                {
+                    "title": "True or False: Common misconceptions and the facts about the Pentavalent Vaccine.",
+                    "info" : "",
+                    "opening" : "",
+                    "ending" : "",
+                    "bullets" : [],
+                    "titled_bullets" : [],
+                    "numbered_bullets" : [],
+                    "misc_and_fact" : [
+                        {
+                            "misc" : [
+                                "The Pentavalent vaccine is unsafe for infants.",
+                                "One dose is enough to protect my child.",
+                                "The vaccine causes long-term complications.",
+                                "A mild fever after vaccination means the vaccine didn’t work.",
+                                "These diseases are rare, so the vaccine isn’t necessary."
+                            ],
+                            "fact" : [
+                                "It is safe for most infants and is part of routine immunizations. Side effects are typically mild and temporary.",
+                                "Multiple doses (usually three) are required to provide complete protection.",
+                                ": Long-term complications are extremely rare. Most side effects are mild and temporary.",
+                                "Mild fever indicates that the body is building immunity. It is a normal and expected reaction.",
+                                "These diseases can still occur and cause severe illness or death, especially in young children. Vaccination is the most effective prevention."
+                            ]
+                        }
+                    ]
+                }
+            ] 
+        }
+    ]
+}
