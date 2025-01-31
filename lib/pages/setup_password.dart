@@ -34,6 +34,13 @@ class _SetupPasswordState extends ConsumerState<SetupPassword> {
   bool obscureTextConfirm = true;
 
   @override
+  void dispose() {
+    super.dispose();
+    password.dispose();
+    confirmPassword.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;

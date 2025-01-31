@@ -29,6 +29,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   bool obscureText = true;
 
   @override
+  void dispose() {
+    super.dispose();
+    email.dispose();
+    password.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;

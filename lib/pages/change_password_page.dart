@@ -39,6 +39,14 @@ class _ChangePasswordPageState extends ConsumerState<ChangePasswordPage> {
   bool confirmNewPassValidator = true;
 
   @override
+  void dispose() {
+    super.dispose();
+    oldPassword.dispose();
+    newPassword.dispose();
+    confirmNewPassword.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;

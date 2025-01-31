@@ -51,6 +51,20 @@ class _SetUpProfileGuardianPageState
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    guardianSurname.dispose();
+    guardianFirstName.dispose();
+    guardianLastName.dispose();
+    guardianMiddleName.dispose();
+    guardianEmail.dispose();
+    guardianNumber.dispose();
+    guardianAge.dispose();
+    guardianBirthDay.dispose();
+    guardianAddress.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;

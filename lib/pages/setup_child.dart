@@ -97,6 +97,33 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    cNickname.dispose();
+    cAge.dispose();
+    cBirthday.dispose();
+    cBirthPlace.dispose();
+    cAddress.dispose();
+    cHeight.dispose();
+    cWeight.dispose();
+    cOthers.dispose();
+    bcgVaccineDate.dispose();
+    hepatitisBVaccineDate.dispose();
+    opv1VaccineDate.dispose();
+    opv2VaccineDate.dispose();
+    opv3VaccineDate.dispose();
+    ipv1VaccineDate.dispose();
+    ipv2VaccineDate.dispose();
+    pcv1VaccineDate.dispose();
+    pcv2VaccineDate.dispose();
+    pcv3VaccineDate.dispose();
+    pentavalent1stDoseVaccineDate.dispose();
+    pentavalent2ndDoseVaccineDate.dispose();
+    pentavalent3rdDoseVaccineDate.dispose();
+    mmrVaccineDate.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
