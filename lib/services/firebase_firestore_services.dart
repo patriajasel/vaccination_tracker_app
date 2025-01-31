@@ -7,9 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccination_tracker_app/models/child_information.dart';
+import 'package:vaccination_tracker_app/models/child_schedules.dart';
 import 'package:vaccination_tracker_app/models/user_information.dart';
 import 'package:vaccination_tracker_app/services/firebase_storage_services.dart';
+import 'package:vaccination_tracker_app/services/notification_services.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
+import 'package:vaccination_tracker_app/services/schedule_services.dart';
 
 /** 
  * TODO SECTION
@@ -18,6 +21,7 @@ import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 class FirebaseFirestoreServices {
   final users = FirebaseFirestore.instance.collection("users");
   final roles = FirebaseFirestore.instance.collection("userRoles");
+  final schedules = FirebaseFirestore.instance.collection('schedules');
 
   Future<void> createUserData(WidgetRef ref, String userID) async {
     await createGuardianDetails(ref, userID);
@@ -285,36 +289,78 @@ class FirebaseFirestoreServices {
               weight: childData[i]!['child_weight'],
               vaccines: ChildVaccines(
                 bcgVaccine: vaccineData[0]!['bcg_vaccine'],
-                bcgDate: vaccineData[0]!['bcg_vaccine_date'].toString(),
+                bcgDate: vaccineData[0]!['bcg_vaccine_date'] != null
+                    ? (vaccineData[0]!['bcg_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 hepaVaccine: vaccineData[0]!['hepatitisB_vaccine'],
-                hepaDate: vaccineData[0]!['hepatitisB_vaccine_date'].toString(),
+                hepaDate: vaccineData[0]!['hepatitisB_vaccine_date'] != null
+                    ? (vaccineData[0]!['hepatitisB_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 opv1Vaccine: vaccineData[0]!['opv1_vaccine'],
-                opv1Date: vaccineData[0]!['opv1_vaccine_date'].toString(),
+                opv1Date: vaccineData[0]!['opv1_vaccine_date'] != null
+                    ? (vaccineData[0]!['opv1_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 opv2Vaccine: vaccineData[0]!['opv2_vaccine'],
-                opv2Date: vaccineData[0]!['opv2_vaccine_date'].toString(),
+                opv2Date: vaccineData[0]!['opv2_vaccine_date'] != null
+                    ? (vaccineData[0]!['opv2_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 opv3Vaccine: vaccineData[0]!['opv3_vaccine'],
-                opv3Date: vaccineData[0]!['opv3_vaccine_date'].toString(),
+                opv3Date: vaccineData[0]!['opv3_vaccine_date'] != null
+                    ? (vaccineData[0]!['opv3_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 ipv1Vaccine: vaccineData[0]!['ipv1_vaccine'],
-                ipv1Date: vaccineData[0]!['ipv1_vaccine_date'].toString(),
+                ipv1Date: vaccineData[0]!['ipv1_vaccine_date'] != null
+                    ? (vaccineData[0]!['ipv1_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 ipv2Vaccine: vaccineData[0]!['ipv2_vaccine'],
-                ipv2Date: vaccineData[0]!['ipv2_vaccine_date'].toString(),
+                ipv2Date: vaccineData[0]!['ipv2_vaccine_date'] != null
+                    ? (vaccineData[0]!['ipv2_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 pcv1Vaccine: vaccineData[0]!['pcv1_vaccine'],
-                pcv1Date: vaccineData[0]!['pcv1_vaccine_date'].toString(),
+                pcv1Date: vaccineData[0]!['pcv1_vaccine_date'] != null
+                    ? (vaccineData[0]!['pcv1_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 pcv2Vaccine: vaccineData[0]!['pcv2_vaccine'],
-                pcv2Date: vaccineData[0]!['pcv2_vaccine_date'].toString(),
+                pcv2Date: vaccineData[0]!['pcv2_vaccine_date'] != null
+                    ? (vaccineData[0]!['pcv2_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 pcv3Vaccine: vaccineData[0]!['pcv3_vaccine'],
-                pcv3Date: vaccineData[0]!['pcv3_vaccine_date'].toString(),
+                pcv3Date: vaccineData[0]!['pcv3_vaccine_date'] != null
+                    ? (vaccineData[0]!['pcv3_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
                 penta1Vaccine: vaccineData[0]!['pentavalent1_vaccine'],
-                penta1Date:
-                    vaccineData[0]!['pentavalent1_vaccine_date'].toString(),
+                penta1Date: vaccineData[0]!['pentavalent1_vaccine_date'] != null
+                    ? (vaccineData[0]!['pentavalent1_vaccine_date']
+                            as Timestamp)
+                        .toDate()
+                    : null,
                 penta2Vaccine: vaccineData[0]!['pentavalent2_vaccine'],
-                penta2Date:
-                    vaccineData[0]!['pentavalent2_vaccine_date'].toString(),
+                penta2Date: vaccineData[0]!['pentavalent2_vaccine_date'] != null
+                    ? (vaccineData[0]!['pentavalent2_vaccine_date']
+                            as Timestamp)
+                        .toDate()
+                    : null,
                 penta3Vaccine: vaccineData[0]!['pentavalent3_vaccine'],
-                penta3Date:
-                    vaccineData[0]!['pentavalent3_vaccine_date'].toString(),
+                penta3Date: vaccineData[0]!['pentavalent3_vaccine_date'] != null
+                    ? (vaccineData[0]!['pentavalent3_vaccine_date']
+                            as Timestamp)
+                        .toDate()
+                    : null,
                 mmrVaccine: vaccineData[0]!['mmr_vaccine'],
-                mmrDate: vaccineData[0]!['mmr_vaccine_date'].toString(),
+                mmrDate: vaccineData[0]!['mmr_vaccine_date'] != null
+                    ? (vaccineData[0]!['mmr_vaccine_date'] as Timestamp)
+                        .toDate()
+                    : null,
               )));
         }
 
@@ -428,6 +474,54 @@ class FirebaseFirestoreServices {
       await users.doc(userID).collection('child').doc(childID).delete();
     } catch (e) {
       print("Deleting child error: $e");
+    }
+  }
+
+  Future<void> obtainAllNeededData(String userID, WidgetRef ref) async {
+    Future.microtask(() {
+      ref.read(rpChildScheds.notifier).reset();
+    });
+
+    await obtainUserData(userID, ref);
+
+    final childData = ref.watch(rpUserInfo);
+
+    for (var child in childData.children) {
+      await obtainChildSchedule(userID, child.childID, ref);
+    }
+
+    final schedules = ref.watch(rpChildScheds);
+
+    await NotificationServices().manageScheduledNotifications(ref);
+
+    await ScheduleServices().trackSchedules(ref);
+
+    await ScheduleServices()
+        .manageVaccineStatus(ref, childData.children, schedules.childScheds);
+  }
+
+  Future<void> obtainChildSchedule(
+      String userID, String childID, WidgetRef ref) async {
+    try {
+      QuerySnapshot scheduleQuery =
+          await schedules.where('child_id', isEqualTo: childID).get();
+
+      for (var schedule in scheduleQuery.docs) {
+        Map<String, dynamic> scheduleData =
+            schedule.data() as Map<String, dynamic>;
+
+        ref.read(rpChildScheds.notifier).addSchedules(ScheduleModel(
+            schedID: schedule.id,
+            childID: childID,
+            childName: scheduleData['child_name'],
+            parent: scheduleData['parent'],
+            schedStatus: scheduleData['schedule_status'],
+            schedDate: (scheduleData['schedule_date'] as Timestamp).toDate(),
+            vaccineType: scheduleData['vaccine_type']));
+      }
+    } catch (e, stacktrace) {
+      print("Error getting child schedule: $e");
+      print(stacktrace);
     }
   }
 }

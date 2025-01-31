@@ -74,7 +74,7 @@ class FirebaseAuthServices {
       await Future.delayed(const Duration(seconds: 1));
     } on FirebaseAuthException catch (e) {
       String message = '';
-      print(e.code);
+      print("E-Code ${e.code}");
       if (e.code == 'invalid-credential') {
         //  If user's credential does not match the database this message will appear
         message = 'Invalid Email or Password';
