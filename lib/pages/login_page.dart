@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vaccination_tracker_app/pages/forgot_password.dart';
 import 'package:vaccination_tracker_app/services/firebase_auth_services.dart';
 import 'package:vaccination_tracker_app/utils/widget_generate.dart';
 
@@ -114,6 +115,29 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ? const Icon(Icons.visibility)
                             : const Icon(Icons.visibility_off),
                         function: showPassword)),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: screenWidth * 0.1, left: screenWidth * 0.1),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ForgotPassword()));
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.black),
+                          ))
+                    ],
+                  ),
+                ),
 
                 SizedBox(height: screenHeight * 0.02),
 

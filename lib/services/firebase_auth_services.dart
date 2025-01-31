@@ -210,4 +210,38 @@ class FirebaseAuthServices {
       print("Error updating email: $e");
     }
   }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+      Fluttertoast.showToast(
+          msg: "Password reset email sent!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 14.0);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        Fluttertoast.showToast(
+            msg: "There is no user associated on the email you've provided",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 14.0);
+      } else if (e.code == 'invalid-email') {
+        Fluttertoast.showToast(
+            msg: "The email you've provided is not valid.",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 14.0);
+      }
+    } catch (e) {
+      print("Sending password reset email failed: $e");
+    }
+  }
 }
