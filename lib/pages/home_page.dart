@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vaccination_tracker_app/models/child_schedules.dart';
+import 'package:vaccination_tracker_app/pages/all_about_vaccines_page.dart';
 import 'package:vaccination_tracker_app/pages/all_calendar_page.dart';
+import 'package:vaccination_tracker_app/services/riverpod_services.dart';
+import 'package:vaccination_tracker_app/utils/show_marked_dates.dart';
 import 'package:vaccination_tracker_app/utils/text_style.dart';
 
 /**
@@ -12,35 +18,17 @@ import 'package:vaccination_tracker_app/utils/text_style.dart';
  * ! Prevent returning back to login if user just logged in
  */
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final List<Map<String, dynamic>> vaccines = [
-    {'title': 'BCG', 'checked': false},
-    {'title': 'Penta 1', 'checked': false},
-    {'title': 'Hepa B', 'checked': false},
-    {'title': 'Penta 2', 'checked': false},
-    {'title': 'OPV 1', 'checked': false},
-    {'title': 'Penta 3', 'checked': false},
-    {'title': 'OPV 2', 'checked': false},
-    {'title': 'PCV 1', 'checked': false},
-    {'title': 'OPV 3', 'checked': false},
-    {'title': 'PCV 2', 'checked': false},
-    {'title': 'IPV 1', 'checked': false},
-    {'title': 'PCV 3', 'checked': false},
-    {'title': 'IPV 2', 'checked': false},
-    {'title': 'MMR', 'checked': false},
-  ];
-
+class _HomePageState extends ConsumerState<HomePage> {
   final List<String> vaccineImages = [
     'lib/assets/images/vaccines/bcg_vaccine.jpg',
     'lib/assets/images/vaccines/hepatitis_b_vaccine.jpg',
-    'lib/assets/images/vaccines/dtap_vaccine.jpg',
     'lib/assets/images/vaccines/opv_vaccine.jpg',
     'lib/assets/images/vaccines/ipv_vaccine.jpg',
     'lib/assets/images/vaccines/pcv_vaccine.jpg',
@@ -51,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   final List<String> vaccineNames = [
     'BCG',
     'Hepatitis B',
-    'DTAP',
     'OPV',
     'IPV',
     'PCV',
@@ -59,22 +46,38 @@ class _HomePageState extends State<HomePage> {
     'Pentavalent',
   ];
 
+  List<DateTime> scheduleDate = [];
+  List<ScheduleModel> scheduleToday = [];
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    DateTime dateToday = DateTime.now();
+    final schedules = ref.watch(rpChildScheds.notifier).childScheds;
+
+    final currentDate = ref.watch(currentDateProvider);
+
+    final isToday = ref.watch(isTodayScheduled);
+    final isTomorrow = ref.watch(isTomorrowScheduled);
+    final isWithinTwo = ref.watch(isWithinTwoDays);
+    final isWithinThree = ref.watch(isWithinThreeDays);
+    final nextSched = ref.watch(nextSchedule);
+
+    final vaccineTracker = ref.watch(vaccineTrackerProvider);
+
+    final themeColor = ref.watch(themeProvider);
+
+    scheduleDate = schedules.map((schedule) => schedule.schedDate).toList();
 
     return Scaffold(
       body: Stack(
         children: [
-          // Background
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.cyan.shade300,
+                  themeColor,
                   Colors.white,
                 ],
                 begin: Alignment.topCenter,
@@ -106,12 +109,53 @@ class _HomePageState extends State<HomePage> {
                               weekendStyle: TextStyles().daysOfWeek),
                           calendarStyle: CalendarStyle(
                               defaultTextStyle: TextStyles().calendarDays,
+                              canMarkersOverflow: false,
                               todayTextStyle: TextStyles().calendarDays,
                               todayDecoration: BoxDecoration(
                                   color: Colors.cyan.shade50,
                                   borderRadius: BorderRadius.circular(20)),
                               weekendTextStyle: TextStyles().calendarDays),
-                          focusedDay: dateToday,
+                          onDaySelected: (selectedDay, focusedDay) {
+                            scheduleToday
+                              ..clear()
+                              ..addAll(
+                                schedules.where((schedule) =>
+                                    schedule.schedDate.year ==
+                                        selectedDay.year &&
+                                    schedule.schedDate.month ==
+                                        selectedDay.month &&
+                                    schedule.schedDate.day == selectedDay.day),
+                              );
+
+                            showDialog(
+                                context: context,
+                                builder: (context) => MarkedDayDialog(
+                                    screenHeight: screenHeight,
+                                    screenWidth: screenWidth,
+                                    currentDate: currentDate,
+                                    schedToday: scheduleToday));
+                          },
+                          calendarBuilders: CalendarBuilders(
+                            markerBuilder: (context, day, events) {
+                              if (scheduleDate.any((selectedDay) =>
+                                  isSameDay(selectedDay, day))) {
+                                return Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: Container(
+                                    width: 8.0,
+                                    height: 8.0,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                );
+                              }
+                              return null;
+                            },
+                          ),
+                          focusedDay: currentDate,
                           firstDay: DateTime.utc(2020, 01, 01),
                           lastDay: DateTime.utc(2040, 12, 31)),
                       Positioned(
@@ -134,14 +178,29 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: screenHeight * 0.05),
                   Center(
                     child: Text(
-                      "October 23, 2024",
+                      isToday
+                          ? 'TODAY is the day!'
+                          : isTomorrow
+                              ? "Tomorrow is the day!"
+                              : isWithinTwo
+                                  ? "IN 2 DAYS!"
+                                  : isWithinThree
+                                      ? "IN 3 DAYS!"
+                                      : nextSched != null
+                                          ? DateFormat('MMMM dd, yyyy')
+                                              .format(nextSched)
+                                          : "",
                       style: TextStyles().nextVaccineDate,
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   Center(
                     child: Text(
-                      "NEXT VACCINATION",
+                      isToday || isTomorrow || isWithinTwo || isWithinThree
+                          ? 'Get your child vaccinated!'
+                          : nextSched != null
+                              ? "NEXT VACCINATION!"
+                              : "No Vaccination Schedule",
                       style: TextStyles().nextVaccineDate,
                     ),
                   ),
@@ -170,25 +229,77 @@ class _HomePageState extends State<HomePage> {
                         crossAxisCount: 2,
                         childAspectRatio: 6,
                       ),
-                      itemCount: vaccines.length,
-                      shrinkWrap:
-                          true, // Ensures GridView doesn't take infinite space
+                      itemCount: vaccineTracker.length,
+                      shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return CheckboxListTile(
-                          title: Text(vaccines[index]['title']),
-                          value: vaccines[index]['checked'],
-                          onChanged: (bool? value) {
-                            setState(() {
-                              vaccines[index]['checked'] = value ?? false;
-                            });
-                          },
+                          title: Text(
+                            vaccineTracker[index]['title'],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'RadioCanada',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          value: vaccineTracker[index]['checked'],
+                          onChanged: null,
                           controlAffinity: ListTileControlAffinity.leading,
-                          fillColor: const WidgetStatePropertyAll(Colors.white),
-                          checkColor: Colors.black,
+                          fillColor: WidgetStatePropertyAll(
+                              vaccineTracker[index]['color']),
+                          checkColor: Colors.white,
                           side: const BorderSide(color: Colors.white),
                         );
                       },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: screenHeight * 0.01,
+                        horizontal: screenWidth * 0.1),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Expanded(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: true,
+                              onChanged: null,
+                              checkColor: Colors.white,
+                              fillColor: WidgetStatePropertyAll(Colors.green),
+                            ),
+                            Text("Taken")
+                          ],
+                        )),
+                        const Expanded(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: true,
+                              onChanged: null,
+                              checkColor: Colors.white,
+                              fillColor: WidgetStatePropertyAll(Colors.amber),
+                            ),
+                            Text("Partial")
+                          ],
+                        )),
+                        Expanded(
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: true,
+                              onChanged: null,
+                              checkColor: Colors.white,
+                              fillColor:
+                                  WidgetStatePropertyAll(Colors.pink[300]),
+                            ),
+                            const Text("Upcoming")
+                          ],
+                        )),
+                      ],
                     ),
                   ),
                   Align(
@@ -209,35 +320,43 @@ class _HomePageState extends State<HomePage> {
                       itemCount: vaccineImages.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        color: Colors.black26,
-                                        blurRadius: 4,
-                                        offset: Offset(0, 2)),
-                                  ],
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(vaccineImages[index],
-                                      height: screenHeight * 0.2,
-                                      width: screenWidth * 0.3,
-                                      fit: BoxFit.cover),
+                        return GestureDetector(
+                          onTap: () => Navigator.push(
+                              context,
+                              (MaterialPageRoute(
+                                  builder: (context) => AllAboutVaccinesPage(
+                                        index: index,
+                                      )))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.black26,
+                                          blurRadius: 4,
+                                          offset: Offset(0, 2)),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset(vaccineImages[index],
+                                        height: screenHeight * 0.2,
+                                        width: screenWidth * 0.3,
+                                        fit: BoxFit.cover),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              vaccineNames[index],
-                              style: TextStyles().vaccineNames,
-                            ),
-                          ],
+                              Text(
+                                vaccineNames[index],
+                                style: TextStyles().vaccineNames,
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
