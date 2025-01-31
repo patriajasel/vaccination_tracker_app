@@ -102,7 +102,6 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.yellow.shade50,
       body: Container(
         decoration: BoxDecoration(
@@ -243,8 +242,7 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
                                 right: screenWidth * 0.02,
                                 left: screenWidth * 0.05),
                             child: GenerateWidget().createTextField(cAge, "Age",
-                                false, true, false, true, ageValidator,
-                                maxLength: 2),
+                                false, true, false, false, ageValidator),
                           ),
                         ),
 
@@ -940,7 +938,7 @@ class _SetUpProfileChildPageState extends ConsumerState<SetUpProfileChildPage> {
     children.add(ChildInformation(
         cNickname.text,
         cFacilityNumber.text,
-        int.parse(cAge.text),
+        cAge.text,
         genderSelectedVal!,
         DateTime.parse(cBirthday.text),
         cBirthPlace.text,
