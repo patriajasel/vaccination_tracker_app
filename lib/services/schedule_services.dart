@@ -6,8 +6,8 @@ import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 
 class ScheduleServices {
   Future<void> trackSchedules(WidgetRef ref) async {
-    final scheduleToTrack = ref.watch(schedulePastToday);
-    final currentDate = ref.watch(currentDateProvider);
+    final scheduleToTrack = ref.read(schedulePastToday);
+    final currentDate = ref.read(currentDateProvider);
     final nextSched = ref.read(nextSchedule.notifier);
 
     for (var schedule in scheduleToTrack) {

@@ -285,8 +285,8 @@ class FirebaseFirestoreServices {
                   DateFormat('MMMM dd, yyyy').format(birthDate).toString(),
               gender: childData[i]!['child_gender'],
               birthplace: childData[i]!['child_birthplace'],
-              height: childData[i]!['child_height'],
-              weight: childData[i]!['child_weight'],
+              height: childData[i]!['child_height'].toString(),
+              weight: childData[i]!['child_weight'].toString(),
               vaccines: ChildVaccines(
                 bcgVaccine: vaccineData[0]!['bcg_vaccine'],
                 bcgDate: vaccineData[0]!['bcg_vaccine_date'] != null
@@ -364,7 +364,7 @@ class FirebaseFirestoreServices {
               )));
         }
 
-        List<String> childDefaultImages = ref.watch(childImageLink);
+        List<String> childDefaultImages = ref.read(childImageLink);
 
         if (childDefaultImages.length < childData.length) {
           childDefaultImages.addAll(
@@ -484,13 +484,15 @@ class FirebaseFirestoreServices {
 
     await obtainUserData(userID, ref);
 
-    final childData = ref.watch(rpUserInfo);
+    if (!ref.context.mounted) return;
+
+    final childData = ref.read(rpUserInfo);
 
     for (var child in childData.children) {
       await obtainChildSchedule(userID, child.childID, ref);
     }
 
-    final schedules = ref.watch(rpChildScheds);
+    final schedules = ref.read(rpChildScheds);
 
     await NotificationServices().manageScheduledNotifications(ref);
 

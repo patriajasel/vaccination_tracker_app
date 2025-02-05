@@ -150,8 +150,9 @@ class NotificationServices {
   }
 
   Future<void> manageScheduledNotifications(WidgetRef ref) async {
-    final allSchedule = ref.watch(rpChildScheds).childScheds;
-    final currentDate = ref.watch(currentDateProvider);
+    final allSchedule = ref.read(rpChildScheds).childScheds;
+    final currentDate =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
     List<ScheduleModel> schedToNotify = [];
 
@@ -165,7 +166,7 @@ class NotificationServices {
     ref.read(schedulePastToday.notifier).state = schedToNotify;
 
     if (schedToNotify.isNotEmpty) {
-      await NotificationServices().createScheduledNotification(schedToNotify);
+      await createScheduledNotification(schedToNotify);
     } else {
       print("No schedules to manage");
     }

@@ -37,7 +37,6 @@ class _AppNavigationState extends ConsumerState<AppNavigation> {
       color: navigatorIndicator,
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       onRefresh: () async {
-        await Future.delayed(const Duration(seconds: 1));
         if (context.mounted) {
           Navigator.pushReplacement(
               context,

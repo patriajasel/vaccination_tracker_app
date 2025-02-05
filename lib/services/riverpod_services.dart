@@ -22,6 +22,7 @@ final rpChildInfo = ChangeNotifierProvider<Children>((ref) {
 });
 
 final rpUserInfo = ChangeNotifierProvider<UserInformation>((ref) {
+  ref.keepAlive();
   return UserInformation([]);
 });
 
