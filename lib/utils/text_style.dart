@@ -24,8 +24,10 @@ class TextStyles {
   TextStyle sectionTitle = const TextStyle(
       fontFamily: 'RadioCanada', fontSize: 20.0, fontWeight: FontWeight.bold);
 
-  TextStyle vaccineNames =
-      const TextStyle(fontFamily: "RadioCanada", fontWeight: FontWeight.bold);
+  TextStyle vaccineNames = const TextStyle(
+      fontFamily: "RadioCanada",
+      fontWeight: FontWeight.bold,
+      color: Colors.black);
 
   // My child page list tile text styles
   TextStyle titleTextStyle = const TextStyle(

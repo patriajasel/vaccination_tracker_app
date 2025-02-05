@@ -17,8 +17,10 @@ class AuthenticationCheck extends ConsumerWidget {
           return const CircularProgressIndicator();
         } else if (snapshot.hasData) {
           return FutureBuilder<void>(
-            future: FirebaseFirestoreServices()
-                .obtainAllNeededData(snapshot.data!.uid, ref),
+            future: FirebaseFirestoreServices().obtainAllNeededData(
+              snapshot.data!.uid,
+              ref,
+            ),
             builder: (context, futureSnapshot) {
               if (futureSnapshot.connectionState == ConnectionState.waiting) {
                 return Container(

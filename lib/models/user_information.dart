@@ -48,8 +48,8 @@ class UserChildren extends ChangeNotifier {
   String birthdate;
   String birthplace;
   String gender;
-  int height;
-  int weight;
+  String height;
+  String weight;
   ChildVaccines vaccines;
 
   UserChildren({
@@ -59,8 +59,8 @@ class UserChildren extends ChangeNotifier {
     this.birthdate = '',
     this.birthplace = '',
     this.gender = '',
-    this.height = 0,
-    this.weight = 0,
+    this.height = '',
+    this.weight = '',
     ChildVaccines? vaccines,
     this.childImage,
   }) : vaccines = vaccines ?? ChildVaccines();
@@ -72,8 +72,8 @@ class UserChildren extends ChangeNotifier {
     birthdate = '';
     birthplace = '';
     gender = '';
-    height = 0;
-    weight = 0;
+    height = '';
+    weight = '';
     childImage = null;
     vaccines.reset();
     notifyListeners();
