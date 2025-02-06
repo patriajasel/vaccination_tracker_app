@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vaccination_tracker_app/models/child_schedules.dart';
+import 'package:vaccination_tracker_app/services/firebase_firestore_services.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 import 'package:vaccination_tracker_app/utils/text_style.dart';
 import 'package:vaccination_tracker_app/utils/widget_generate.dart';
@@ -45,9 +48,9 @@ class _RhuPageState extends ConsumerState<RhuPage> {
     'PCV1',
     'PCV2',
     'PCV3',
-    'Pentavalent 1',
-    'Pentavalent 2',
-    'Pentavalent 3',
+    'Pentavalent 1st Dose',
+    'Pentavalent 2nd Dose',
+    'Pentavalent 3rd Dose',
     'MMR'
   ];
 
@@ -87,6 +90,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
     final currentDate = ref.watch(currentDateProvider);
 
     final childData = ref.watch(rpUserInfo).children;
+    final userData = ref.watch(rpUserInfo);
 
     childNames
       ..clear()
@@ -191,6 +195,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                           onChanged: (val) {
                             setState(() {
                               selectedVaccine = val as String;
+                              selectedFollowUp == null;
                             });
                           },
                           style: TextStyle(
@@ -241,6 +246,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                           onChanged: (val) {
                             setState(() {
                               selectedChild = val as String;
+                              selectedFollowUp == null;
                             });
                           },
                           style: TextStyle(
@@ -342,7 +348,57 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                         height: screenHeight * 0.01,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          final childID = childData
+                              .firstWhere(
+                                (child) => child.childNickname == selectedChild,
+                              )
+                              .childID;
+                          final parentName = userData.name;
+                          final userID = FirebaseAuth.instance.currentUser?.uid;
+
+                          await FirebaseFirestoreServices()
+                              .updateScheduleIfExist(
+                                  selectedVaccine,
+                                  DateTime.now(),
+                                  selectedChild!,
+                                  childID,
+                                  'Finished',
+                                  parentName);
+
+                          await FirebaseFirestoreServices()
+                              .updateVaccinationStatus(
+                                  userID!, childID, selectedVaccine, ref);
+
+                          if (!excludedVaccines.contains(selectedVaccine) &&
+                              selectedFollowUp != null) {
+                            String followUpVaccine =
+                                getFollowUpVaccine(selectedVaccine);
+
+                            await FirebaseFirestoreServices()
+                                .updateVaccinationStatus(
+                                    userID, childID, followUpVaccine, ref);
+
+                            Fluttertoast.showToast(
+                                msg:
+                                    "Vaccination update and follow up schedule has been set",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.SNACKBAR,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 14.0);
+                          }
+
+                          if (childHeight.text.isNotEmpty &&
+                              childWeight.text.isNotEmpty) {
+                            await FirebaseFirestoreServices()
+                                .updateChildHeightAndWeight(userID, childID,
+                                    childHeight.text, childWeight.text);
+                          }
+
+                          await FirebaseFirestoreServices()
+                              .obtainAllNeededData(userID, ref);
+                        },
                         style: ElevatedButton.styleFrom(
                             fixedSize:
                                 Size(screenWidth * 0.4, screenHeight * 0.05),
@@ -432,6 +488,27 @@ class _RhuPageState extends ConsumerState<RhuPage> {
         ],
       ),
     );
+  }
+
+  String getFollowUpVaccine(String vaccineName) {
+    switch (vaccineName) {
+      case 'OPV1':
+        return 'OPV2';
+      case 'OPV2':
+        return 'OPV3';
+      case 'IPV1':
+        return 'IPV2';
+      case 'PCV1':
+        return 'PCV2';
+      case 'PCV2':
+        return 'PCV3';
+      case 'Pentavalent 1st Dose':
+        return 'Pentavalent 2nd Dose';
+      case 'Pentavalent 2nd Dose':
+        return 'Pentavalent 3rd Dose';
+      default:
+        return 'vaccine-not-exist';
+    }
   }
 
   void updateTakenScheduleToday() {

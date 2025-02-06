@@ -4,7 +4,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccination_tracker_app/models/child_information.dart';
 import 'package:vaccination_tracker_app/models/child_schedules.dart';
@@ -524,6 +526,222 @@ class FirebaseFirestoreServices {
     } catch (e, stacktrace) {
       print("Error getting child schedule: $e");
       print(stacktrace);
+    }
+  }
+
+  Future<void> updateScheduleIfExist(
+      String vaccineType,
+      DateTime dateCompleted,
+      String childName,
+      String childID,
+      String status,
+      String parentName) async {
+    try {
+      QuerySnapshot query = await schedules
+          .where('child_id', isEqualTo: childID)
+          .where('child_name', isEqualTo: childName)
+          .where('vaccine_type', isEqualTo: vaccineType)
+          .get();
+
+      if (query.docs.isEmpty) {
+        return;
+      } else {
+        for (var schedule in query.docs) {
+          schedule.reference.update({'schedule_status': 'Finished'});
+        }
+      }
+    } catch (e) {
+      print('Error updating existing schedule: $e');
+    }
+  }
+
+  Future<void> setFollowUpSchedule(
+      String vaccineType,
+      DateTime followUpDate,
+      String childName,
+      String childID,
+      String status,
+      String parentName) async {
+    try {
+      QuerySnapshot query = await schedules
+          .where('child_id', isEqualTo: childID)
+          .where('child_name', isEqualTo: childName)
+          .where('vaccine_type', isEqualTo: vaccineType)
+          .get();
+
+      if (query.docs.isEmpty) {
+        final date = DateFormat('yyyyMMdd').format(followUpDate);
+        late String scheduleID;
+        bool scheduleExists = true;
+
+        Map<String, dynamic> scheduleInfo = {
+          'child_name': childName,
+          'child_id': childID,
+          'schedule_date': followUpDate,
+          'vaccine_type': vaccineType,
+          'schedule_status': status,
+          'parent': parentName
+        };
+
+        try {
+          while (scheduleExists) {
+            final randomNumber = Random().nextInt(90000) + 10000;
+            scheduleID = '$date$randomNumber';
+
+            final docSnapshot = await schedules.doc(scheduleID).get();
+
+            if (!docSnapshot.exists) {
+              scheduleExists = false;
+            }
+          }
+
+          await schedules.doc(scheduleID).set(scheduleInfo);
+          print("Schedule set successfully with ID: $scheduleID");
+
+          Fluttertoast.showToast(
+              msg: "Follow Up schedule set ",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 14.0);
+        } catch (e) {
+          print("Error setting new schedule: $e");
+        }
+      } else {}
+    } catch (e) {
+      print('Error setting Follow up schedule: $e');
+    }
+  }
+
+  Future<void> updateVaccinationStatus(
+    String userID,
+    String childID,
+    String vaccineType,
+    WidgetRef ref,
+  ) async {
+    final vaccineField = getVaccineField(vaccineType);
+    final dateField = getVaccineDateField(vaccineType);
+    try {
+      QuerySnapshot vaccineCollection = await users
+          .doc(userID)
+          .collection('child')
+          .doc(childID)
+          .collection('vaccines')
+          .get();
+
+      for (var vaccine in vaccineCollection.docs) {
+        final vaccineData = vaccine.data() as Map<String, dynamic>;
+
+        if (vaccineData[vaccineField] == 'Yes') {
+          Fluttertoast.showToast(
+              msg: "Vaccination Status is already updated",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 14.0);
+          return;
+        } else {
+          vaccine.reference
+              .update({vaccineField: 'Yes', dateField: DateTime.now()});
+
+          Fluttertoast.showToast(
+              msg: "Vaccination status has been updated",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 14.0);
+        }
+
+        await obtainAllNeededData(userID, ref);
+      }
+    } catch (e) {
+      print('Error updating vaccination status: $e');
+    }
+  }
+
+  Future<void> updateChildHeightAndWeight(String userID, String childID,
+      String childHeight, String childWeight) async {
+    try {
+      await users
+          .doc(userID)
+          .collection('child')
+          .doc(childID)
+          .update({'child_height': childHeight, 'child_weight': childWeight});
+    } catch (e) {
+      print('Error updating child height and weight: $e');
+    }
+  }
+
+  String getVaccineField(String vaccine) {
+    switch (vaccine) {
+      case 'BCG':
+        return 'bcg_vaccine';
+      case 'Hepatitis B':
+        return 'hepatitisB_vaccine';
+      case 'IPV1':
+        return 'ipv1_vaccine';
+      case 'IPV2':
+        return 'ipv2_vaccine';
+      case 'OPV1':
+        return 'opv1_vaccine';
+      case 'OPV2':
+        return 'opv2_vaccine';
+      case 'OPV3':
+        return 'opv3_vaccine';
+      case 'MMR':
+        return 'mmr_vaccine';
+      case 'PCV1':
+        return 'pcv1_vaccine';
+      case 'PCV2':
+        return 'pcv2_vaccine';
+      case 'PCV3':
+        return 'pcv3_vaccine';
+      case 'Pentavalent 1st Dose':
+        return 'pentavalent1_vaccine';
+      case 'Pentavalent 2nd Dose':
+        return 'pentavalent2_vaccine';
+      case 'Pentavalent 3rd Dose':
+        return 'pentavalent3_vaccine';
+      default:
+        return 'vaccine-not-exist';
+    }
+  }
+
+  String getVaccineDateField(String vaccine) {
+    switch (vaccine) {
+      case 'BCG':
+        return 'bcg_vaccine_date';
+      case 'Hepatitis B':
+        return 'hepatitisB_vaccine_date';
+      case 'IPV1':
+        return 'ipv1_vaccine_date';
+      case 'IPV2':
+        return 'ipv2_vaccine_date';
+      case 'OPV1':
+        return 'opv1_vaccine_date';
+      case 'OPV2':
+        return 'opv2_vaccine_date';
+      case 'OPV3':
+        return 'opv3_vaccine_date';
+      case 'MMR':
+        return 'mmr_vaccine_date';
+      case 'PCV1':
+        return 'pcv1_vaccine_date';
+      case 'PCV2':
+        return 'pcv2_vaccine_date';
+      case 'PCV3':
+        return 'pcv3_vaccine_date';
+      case 'Pentavalent 1st Dose':
+        return 'pentavalent1_vaccine_date';
+      case 'Pentavalent 2nd Dose':
+        return 'pentavalent2_vaccine_date';
+      case 'Pentavalent 3rd Dose':
+        return 'pentavalent3_vaccine_date';
+      default:
+        return 'vaccine-not-exist';
     }
   }
 }
