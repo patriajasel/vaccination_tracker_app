@@ -85,6 +85,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final themeColor = ref.watch(themeProvider);
+    final secondaryColor = ref.watch(navIndicatorProvider);
 
     final schedules = ref.watch(rpChildScheds).childScheds;
     final currentDate = ref.watch(currentDateProvider);
@@ -441,6 +442,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Container(
+                            height: screenHeight * 0.085,
                             alignment: Alignment.center,
                             margin: EdgeInsets.only(
                                 top: screenHeight * 0.01,
@@ -448,34 +450,98 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                 left: screenWidth * 0.05),
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                                color: Colors.blue.shade700,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                                color: themeColor,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    color: secondaryColor, width: 2)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      "24",
-                                      style: TextStyle(fontSize: 12),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: screenWidth * 0.01),
+                                      child: const Text(
+                                        "24",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 30,
+                                            fontFamily: 'Mali',
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                    Text("FEB", style: TextStyle(fontSize: 12)),
-                                    Text("10:00 AM, ",
-                                        style: TextStyle(fontSize: 12)),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: screenWidth * 0.01),
+                                      child: const Text(
+                                        "February",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Mali',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 25,
-                                  child: VerticalDivider(
+                                  height: screenHeight * 0.1,
+                                  child: const VerticalDivider(
                                     width: 20,
                                     thickness: 2,
                                     color: Colors.white,
                                   ),
                                 ),
-                                Text("10:00 AM"),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: screenWidth * 0.01),
+                                  child: const Text(
+                                    "Vaccination Day",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: 'Mali',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.1,
+                                  child: const VerticalDivider(
+                                    width: 20,
+                                    thickness: 2,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "8:00 AM",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Mali',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "-",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontFamily: 'Mali',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "5:00 PM",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: 'Mali',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           );
