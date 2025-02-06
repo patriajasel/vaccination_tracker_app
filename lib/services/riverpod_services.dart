@@ -75,3 +75,5 @@ final navIndicatorProvider = StateProvider<Color>(
 );
 
 final isLoadingProvider = StateProvider<bool>((ref) => false);
+
+final isConnected = StateProvider<bool>((ref) => false);

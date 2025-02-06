@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:vaccination_tracker_app/models/vaccine_data.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
 
@@ -15,16 +19,49 @@ class AllAboutVaccinesPage extends ConsumerStatefulWidget {
 
 class _AllAboutVaccinesPageState extends ConsumerState<AllAboutVaccinesPage> {
   late BetterPlayerController videoController;
-  String url =
-      'https://cdn.pixabay.com/video/2022/03/21/111538-691223046_large.mp4';
+
+  List<String> videoDirectory = [
+    'lib/assets/videos/general_video_1.mp4',
+    'lib/assets/videos/general_video_2.mp4',
+    'lib/assets/videos/opv_video.mp4',
+    'lib/assets/videos/opv_video.mp4',
+    'lib/assets/videos/general_video_3.mp4',
+    'lib/assets/videos/general_video_2.mp4',
+    'lib/assets/videos/general_video_2.mp4',
+  ];
+
+  List<File> videoFiles = [];
 
   @override
   void initState() {
     super.initState();
+    videoController = BetterPlayerController(const BetterPlayerConfiguration());
+    loadEverything();
+  }
 
-    videoController = BetterPlayerController(const BetterPlayerConfiguration(),
-        betterPlayerDataSource:
-            BetterPlayerDataSource(BetterPlayerDataSourceType.network, url));
+  void loadEverything() async {
+    await _copyAssetToLocal();
+  }
+
+  Future<void> _copyAssetToLocal() async {
+    try {
+      var content = await rootBundle.load(videoDirectory[widget.index]);
+      final directory = await getApplicationDocumentsDirectory();
+      var file = File("${directory.path}/intro.mp4");
+      file.writeAsBytesSync(content.buffer.asUint8List());
+      _loadIntroVideo(file.path);
+    } catch (e) {
+      print("Error playing video: $e");
+    }
+  }
+
+  void _loadIntroVideo(String fullPath) {
+    videoController.setupDataSource(
+      BetterPlayerDataSource(
+        BetterPlayerDataSourceType.file,
+        fullPath,
+      ),
+    );
   }
 
   @override

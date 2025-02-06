@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,10 +51,16 @@ class VaccinationTrackerApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future.microtask(() {
+    Future.microtask(() async {
       if (childImage != null) {
         ref.read(childImageLink.notifier).state = childImage!;
         ref.read(rpVaccineData.notifier).state = vaccineData;
+      }
+
+      bool hasInternet = await checkInternetConnection();
+
+      if (hasInternet) {
+        ref.read(isConnected.notifier).state = false;
       }
     });
 
@@ -61,5 +68,17 @@ class VaccinationTrackerApp extends ConsumerWidget {
         debugShowCheckedModeBanner: false,
         home:
             isFirstTime ? const OnBoardingPage() : const AuthenticationCheck());
+  }
+
+  Future<bool> checkInternetConnection() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult.contains(ConnectivityResult.none)) {
+      return false;
+    } else if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
+      return true;
+    }
+
+    return false;
   }
 }
