@@ -540,6 +540,10 @@ class FirebaseFirestoreServices {
       String childID,
       String status,
       String parentName) async {
+    final date = DateFormat('yyyyMMdd').format(dateCompleted);
+    late String scheduleID;
+    final randomNumber = Random().nextInt(90000) + 10000;
+    scheduleID = '$date$randomNumber';
     try {
       QuerySnapshot query = await schedules
           .where('child_id', isEqualTo: childID)
@@ -548,7 +552,14 @@ class FirebaseFirestoreServices {
           .get();
 
       if (query.docs.isEmpty) {
-        return;
+        await schedules.doc(scheduleID).set({
+          'child_id': childID,
+          'child_name': childName,
+          'vaccine_type': vaccineType,
+          'parent': parentName,
+          'schedule_date': dateCompleted,
+          'schedule_status': 'Finished'
+        });
       } else {
         for (var schedule in query.docs) {
           schedule.reference.update({'schedule_status': 'Finished'});

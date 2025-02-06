@@ -449,7 +449,6 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                             height: screenHeight * 0.085,
                             alignment: Alignment.center,
                             margin: EdgeInsets.only(
-                                top: screenHeight * 0.01,
                                 right: screenWidth * 0.05,
                                 left: screenWidth * 0.05),
                             padding: const EdgeInsets.all(5),
