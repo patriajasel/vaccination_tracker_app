@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:vaccination_tracker_app/models/child_schedules.dart';
 import 'package:vaccination_tracker_app/services/firebase_firestore_services.dart';
 import 'package:vaccination_tracker_app/services/riverpod_services.dart';
@@ -89,6 +90,9 @@ class _RhuPageState extends ConsumerState<RhuPage> {
 
     final schedules = ref.watch(rpChildScheds).childScheds;
     final currentDate = ref.watch(currentDateProvider);
+    final rhuSchedules = ref.watch(rhuScheduleProvider).rhuSchedules;
+
+    print('RHU Length: ${rhuSchedules.length}');
 
     final childData = ref.watch(rpUserInfo).children;
     final userData = ref.watch(rpUserInfo);
@@ -439,7 +443,7 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                       height: screenHeight * 0.5,
                       child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: rhuSchedules.length,
                         itemBuilder: (context, index) {
                           return Container(
                             height: screenHeight * 0.085,
@@ -465,9 +469,9 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: screenWidth * 0.01),
-                                      child: const Text(
-                                        "24",
-                                        style: TextStyle(
+                                      child: Text(
+                                        rhuSchedules[index].date.day.toString(),
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 30,
                                             fontFamily: 'Mali',
@@ -477,9 +481,11 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                           horizontal: screenWidth * 0.01),
-                                      child: const Text(
-                                        "February",
-                                        style: TextStyle(
+                                      child: Text(
+                                        DateFormat('MMMM')
+                                            .format(rhuSchedules[index].date)
+                                            .toString(),
+                                        style: const TextStyle(
                                             fontSize: 12,
                                             fontFamily: 'Mali',
                                             fontWeight: FontWeight.bold),
@@ -498,9 +504,9 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: screenWidth * 0.01),
-                                  child: const Text(
-                                    "Vaccination Day",
-                                    style: TextStyle(
+                                  child: Text(
+                                    rhuSchedules[index].title,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontFamily: 'Mali',
                                         fontWeight: FontWeight.bold),
@@ -514,19 +520,19 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                const Column(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "8:00 AM",
-                                      style: TextStyle(
+                                      rhuSchedules[index].startTime,
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: 'Mali',
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                      "-",
+                                    const Text(
+                                      "to",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -534,8 +540,8 @@ class _RhuPageState extends ConsumerState<RhuPage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      "5:00 PM",
-                                      style: TextStyle(
+                                      rhuSchedules[index].endTime,
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: 'Mali',
                                           fontWeight: FontWeight.bold),

@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:vaccination_tracker_app/models/child_information.dart';
 import 'package:vaccination_tracker_app/models/child_schedules.dart';
+import 'package:vaccination_tracker_app/models/rhu_schedule_model.dart';
 import 'package:vaccination_tracker_app/models/user_information.dart';
 import 'package:vaccination_tracker_app/services/firebase_storage_services.dart';
 import 'package:vaccination_tracker_app/services/notification_services.dart';
@@ -24,6 +25,7 @@ class FirebaseFirestoreServices {
   final users = FirebaseFirestore.instance.collection("users");
   final roles = FirebaseFirestore.instance.collection("userRoles");
   final schedules = FirebaseFirestore.instance.collection('schedules');
+  final rhuSchedules = FirebaseFirestore.instance.collection('rhu_schedules');
 
   Future<void> createUserData(WidgetRef ref, String userID) async {
     await createGuardianDetails(ref, userID);
@@ -502,6 +504,8 @@ class FirebaseFirestoreServices {
 
     await ScheduleServices()
         .manageVaccineStatus(ref, childData.children, schedules.childScheds);
+
+    await obtainRHUSchedules(ref);
   }
 
   Future<void> obtainChildSchedule(
@@ -672,6 +676,32 @@ class FirebaseFirestoreServices {
           .update({'child_height': childHeight, 'child_weight': childWeight});
     } catch (e) {
       print('Error updating child height and weight: $e');
+    }
+  }
+
+  Future<void> obtainRHUSchedules(WidgetRef ref) async {
+    Future.microtask(() {
+      ref.read(rhuScheduleProvider.notifier).reset();
+    });
+
+    final currentDate = ref.read(currentDateProvider);
+
+    try {
+      QuerySnapshot rhuScheds = await rhuSchedules.get();
+
+      for (var rhu in rhuScheds.docs) {
+        final scheds = rhu.data() as Map<String, dynamic>;
+
+        DateTime schedDate = (scheds['rhu_date'] as Timestamp).toDate();
+
+        if (schedDate.month == currentDate.month) {
+          ref.read(rhuScheduleProvider.notifier).addRhuSchedule(
+              RhuScheduleModel(scheds['rhu_title'], schedDate,
+                  scheds['rhu_start_time'], scheds['rhu_end_time']));
+        }
+      }
+    } catch (e) {
+      print('Error getting RHU schedules');
     }
   }
 

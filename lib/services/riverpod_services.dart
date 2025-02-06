@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vaccination_tracker_app/models/child_information.dart';
 import 'package:vaccination_tracker_app/models/child_schedules.dart';
 import 'package:vaccination_tracker_app/models/guardian_information.dart';
+import 'package:vaccination_tracker_app/models/rhu_schedule_model.dart';
 import 'package:vaccination_tracker_app/models/user_information.dart';
 import 'package:vaccination_tracker_app/models/vaccine_data.dart';
 
@@ -25,6 +26,9 @@ final rpUserInfo = ChangeNotifierProvider<UserInformation>((ref) {
   ref.keepAlive();
   return UserInformation([]);
 });
+
+final rhuScheduleProvider =
+    ChangeNotifierProvider<RhuSchedules>((ref) => RhuSchedules([]));
 
 final childImageLink = StateProvider<List<String>>((ref) => []);
 
